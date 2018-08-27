@@ -1,5 +1,6 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
+  <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -26,8 +27,8 @@
     <hudson.tasks.Shell>
       <command>cd /var/lib/jenkins/jobs;
 git add */config.xml -f;
-git commit -m &apos;Sauvegardes auto des jobs jenkins&apos;;
-git push origin master;</command>
+git commit -m &apos;Sauvegardes auto des jobs jenkins&apos; | true;
+git push origin master | true;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
