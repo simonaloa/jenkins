@@ -17,7 +17,11 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 4 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.19.1">
@@ -40,13 +44,7 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>runuser -l aloa -c &apos;cd solution_ce; git pull origin master&apos;
-
-runuser -l aloa -c &apos;cd solution_ce; php bin/console assets:install --symlink&apos;
-
-runuser -l aloa -c &apos;cd solution_ce; php bin/console assetic:dump&apos;
-
-runuser -l aloa -c &apos;cd solution_ce; php bin/console cache:clear -e prod&apos;</execCommand>
+                  <execCommand>runuser -l aloa -c &apos;cd solution_ce; mysqldump -u solution_ce -p&apos;Palmier-10&apos; solution_ce_adapei &gt; ../database_saves/ADAPEI/export_database_$(date +%Y-%m-%d).sql&apos;</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
                   <useAgentForwarding>false</useAgentForwarding>
