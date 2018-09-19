@@ -1,5 +1,6 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
+  <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -21,10 +22,26 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cd /var/lib/jenkins/HOME/Tripapyrus_planning
+
 git pull origin master
+
 ionic cordova build browser --prod --release
 
-# ncftpput </command>
+cp -r platforms/browser/www/* ../Tripapyrus_planning_browser_releases
+
+cd /var/lib/jenkins/HOME/Tripapyrus_planning_browser_releases
+
+git add . -v
+
+git commit -m &apos;Commit auto&apos; | true
+
+git push origin master | true
+
+git push site master | true
+
+ssh tripapyrpa@ftp.tripapyrus.com &apos;cd planning; git checkout -f&apos;
+
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
