@@ -23,7 +23,9 @@
     <hudson.tasks.Shell>
       <command>cd /var/lib/jenkins/HOME/Tripapyrus_planning
 
-git pull origin master
+git fetch origin master &amp;&amp; git reset --hard origin/master
+
+npm install 
 
 ionic cordova build browser --prod --release
 
