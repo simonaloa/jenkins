@@ -23,7 +23,8 @@
     <hudson.tasks.Shell>
       <command>cd /var/lib/jenkins/HOME/Automation;
 
-git pull origin master;
+# git pull origin master;
+git fetch origin master &amp;&amp; git reset --hard origin/master
 
 php script-generateJenkinsJobs.php</command>
     </hudson.tasks.Shell>
