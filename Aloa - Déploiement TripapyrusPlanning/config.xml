@@ -23,7 +23,7 @@
     <hudson.tasks.Shell>
       <command>cd /var/lib/jenkins/HOME/Tripapyrus_planning
 
-git fetch origin master &amp;&amp; git reset --hard origin/master
+git fetch origin reajax &amp;&amp; git reset --hard origin/reajax
 
 npm install 
 
