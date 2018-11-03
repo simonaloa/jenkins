@@ -68,7 +68,8 @@
     </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
     <hudson.tasks.Shell>
       <command>cd $HOME/HOME/Evea;
-				git pull site master
+				git fetch site master
+				git reset --hard site/master
 				git push origin master -f
 
 				WPNAME=Evea
@@ -76,7 +77,13 @@
 				WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
 				URL=&apos;http://evea.asso.fr/&apos;
 				TYPE=&apos;wordpress&apos;
-				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&quot;</command>
+				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&quot;
+
+				declare -u UPPER_LF=&quot;Evea&quot;
+				mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
+				~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
+				~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
+			</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

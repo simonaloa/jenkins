@@ -70,7 +70,8 @@
     <hudson.tasks.Shell>
       <command>
 				cd $HOME/HOME/Aob-Tools;
-				git pull site master
+				git fetch site master 
+				git reset --hard site/master
 				git push origin master -f
 				
 				WPNAME=&apos;Aob-Tools&apos;
