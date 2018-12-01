@@ -20,12 +20,12 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.19.1">
+    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.20.1">
       <delegate>
         <consolePrefix>SSH: </consolePrefix>
         <delegate plugin="publish-over@0.22">
           <publishers>
-            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.19.1">
+            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.20.1">
               <configName>VPS49</configName>
               <verbose>false</verbose>
               <transfers>
@@ -41,12 +41,13 @@
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
                   <execCommand>runuser -l aloa -c &apos;cd solution_ce; git pull origin master&apos;
-
+cd /var/www/solution_ce;
+/bin/rm -rf var/cache/*
+chmod -R 777 var
 runuser -l aloa -c &apos;cd solution_ce; php bin/console assets:install --symlink&apos;
-
 runuser -l aloa -c &apos;cd solution_ce; php bin/console assetic:dump&apos;
-
-runuser -l aloa -c &apos;cd solution_ce; php bin/console cache:clear -e prod&apos;</execCommand>
+runuser -l aloa -c &apos;cd solution_ce; php bin/console cache:clear -e prod&apos;
+</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
                   <useAgentForwarding>false</useAgentForwarding>
