@@ -34,7 +34,7 @@ pipeline {
                 )
             }
         }
-        stage(&quot;Lancement des imports&quot;) {
+        stage(&quot;Lancement des imports article et client&quot;) {
             steps {
                 parallel (
                     &quot;Import Article&quot; : {
@@ -42,7 +42,13 @@ pipeline {
                     },
                     &quot;Import Client&quot; : {
                         build(&quot;Aloa - TRIPAP - Import Client&quot;)
-                    },
+                    }
+                )
+            }
+        }
+        stage(&quot;Lancement des imports liaison article client&quot;) {
+            steps {
+                parallel (
                     &quot;Import Client Article&quot; : {
                         build(&quot;Aloa - TRIPAP - Import Client_Article&quot;)
                     }
