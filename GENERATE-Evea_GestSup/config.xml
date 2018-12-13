@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
-	<actions/>
-	<description>GENERATED JOB</description>
-	<keepDependencies>false</keepDependencies>
-	<properties/>
-	<scm class="hudson.scm.NullSCM"/>
-	<canRoam>true</canRoam>
-	<disabled>false</disabled>
-	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-	<triggers>
-		<hudson.triggers.TimerTrigger>
-			<spec>H 4 * * *</spec>
-		</hudson.triggers.TimerTrigger>
-	</triggers>
-	<concurrentBuild>false</concurrentBuild>
-	<builders>
-		<hudson.tasks.Shell>
-			<command>cd $HOME/HOME/Evea_GestSup;
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>GENERATED JOB</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 4 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd $HOME/HOME/Evea_GestSup;
 				USER=lesmetives_aloa
 				PASS=Palmier-10
 				HOST=ftp.lesmetives.com				
@@ -24,17 +29,17 @@
 				wget -mnH --cut-dirs=3 ftp://$USER:$PASS@$HOST/public/www/logistique -X public/www/logistique/.git
 
 				git add . -v
-				git commit -m 'Sauvegarde journaliere' | true
+				git commit -m &apos;Sauvegarde journaliere&apos; | true
 				git push origin master -f | true
 				
-				WPNAME='Evea_GestSup'
+				WPNAME=&apos;Evea_GestSup&apos;
 				WPDBVERSION=``
 				WPPLUGIN=``
-				URL='http://lesmetives.com/logistique/'
-				TYPE=''
-				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL"</command>
-		</hudson.tasks.Shell>
-	</builders>
-	<publishers/>
-	<buildWrappers/>
+				URL=&apos;http://lesmetives.com/logistique/&apos;
+				TYPE=&apos;&apos;
+				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
 </project>
