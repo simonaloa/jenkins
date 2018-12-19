@@ -8,7 +8,7 @@
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret></gogsSecret>
+      <gogsSecret>36aa2853c7de6783d9f66dbf5da106a3546ffdb8</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
@@ -17,7 +17,11 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <org.jenkinsci.plugins.gogs.GogsTrigger plugin="gogs-webhook@1.0.14">
+      <spec></spec>
+    </org.jenkinsci.plugins.gogs.GogsTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.20.1">
