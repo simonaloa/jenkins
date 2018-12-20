@@ -1,27 +1,22 @@
-<?xml version='1.1' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description>GENERATED JOB</description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
-      <doNotScan>false</doNotScan>
-    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-  </properties>
-  <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>H 4 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>cd $HOME/HOME/Aidvy;
+<?xml version="1.0" encoding="UTF-8"?><project>
+	<actions/>
+	<description>GENERATED JOB</description>
+	<keepDependencies>false</keepDependencies>
+	<properties/>
+	<scm class="hudson.scm.NullSCM"/>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H 4 * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>cd $HOME/HOME/Aidvy;
 				USER=aidvycompe
 				PASS=r1v76WNe
 				HOST=ftp.cluster005.ovh.net				
@@ -29,18 +24,18 @@
 				wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 				
 				git add . -v
-				git commit -m &apos;Sauvegarde journaliere&apos; | true
+				git commit -m 'Sauvegarde journaliere' | true
 				git push origin master -f
 				
-				WPNAME=&apos;Aidvy&apos;
-				WPDBVERSION=`cat language/en-GB/en-GB.xml | grep &quot;&lt;version&gt;&quot; | cut -d &apos;&gt;&apos; -f 2 | cut -d &apos;&lt;&apos; -f 1`
-				WPPLUGIN=&apos;&apos;
-				URL=&apos;http://www.aidvy.com/&apos;
-				TYPE=&apos;joomla&apos;
-				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&quot;
+				WPNAME='Aidvy'
+				WPDBVERSION=`cat language/en-GB/en-GB.xml | grep "&lt;version&gt;" | cut -d '&gt;' -f 2 | cut -d '&lt;' -f 1`
+				WPPLUGIN=''
+				URL='http://www.aidvy.com/'
+				TYPE='joomla'
+				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL"
 			</command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers/>
-  <buildWrappers/>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers/>
+	<buildWrappers/>
 </project>
