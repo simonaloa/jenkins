@@ -51,7 +51,7 @@
 										git add . -v 
 										git commit --author="Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;" -m 'Sauvegarde journaliere' | true
 									</execCommand>
-									<execTimeout>120000</execTimeout>
+									<execTimeout>2000000</execTimeout>
 									<usePty>false</usePty>
 									<useAgentForwarding>false</useAgentForwarding>
 								</jenkins.plugins.publish__over__ssh.BapSshTransfer>
@@ -77,7 +77,8 @@
 				WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d '/'`
 				URL='http://aguilarconseilengestion.aloa.ovh/'
 				TYPE='wordpress'
-				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL"
+				SERV='OVH ALOA.OVH'
+				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV"
 
 				declare -u UPPER_LF="AguilarConseilEnGestionRefonte"
 				mkdir -p $HOME/HOME/_Rapports/$UPPER_LF

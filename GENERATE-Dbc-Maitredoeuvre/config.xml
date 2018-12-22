@@ -32,7 +32,8 @@
 				WPPLUGIN=''
 				URL='http://www.dbc-maitredoeuvre.fr/'
 				TYPE='joomla'
-				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL"
+				SERV=''
+				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV"
 			</command>
 		</hudson.tasks.Shell>
 	</builders>
