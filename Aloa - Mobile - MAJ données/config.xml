@@ -15,14 +15,13 @@
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
       <triggers>
         <hudson.triggers.TimerTrigger>
-          <spec>H/15 * * * * </spec>
+          <spec>H/10 * * * *</spec>
         </hudson.triggers.TimerTrigger>
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty/>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
       <gogsSecret></gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
@@ -33,34 +32,28 @@
 pipeline {
     agent any
     stages {
-        stage(&quot;Récupération des fichiers export EBP&quot;) {
+        stage(&apos;Récupération du CSV&apos;) {
             steps {
-                parallel (
-                    &quot;Récupération&quot; : {
-                        build(&quot;Aloa - TRIPAP - Récupération des exports EBP servTripap vers servProxmox&quot;)
-                    }
-                )
+                sh &apos;&apos;&apos;#!/bin/bash
+                cd /var/www/html/AloaMobile/aloaMobile;
+                if ssh aloaovhjok@ftp.cluster023.hosting.ovh.net stat /homez.105/aloaovhjok/.pureftpd-upload* &gt; /dev/null 2&gt;&amp;1
+                    then
+                        echo &quot;Le fichier est en cours de transfert&quot;
+                        false
+                    else
+                        echo &quot;Le fichier n&apos;est plus en cours de transfert&quot;
+                        sudo scp -i /var/lib/jenkins/.ssh/id_rsa aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/A-SuiviTéléphone.csv . 
+                        sudo chown aloa:aloa A-SuiviTéléphone.csv
+                fi
+                &apos;&apos;&apos;
             }
         }
-        stage(&quot;Lancement des imports article et client&quot;) {
+        stage(&apos;Import des données&apos;) {
             steps {
-                parallel (
-                    &quot;Import Article&quot; : {
-                        build(&quot;Aloa - TRIPAP - Import Article&quot;)
-                    },
-                    &quot;Import Client&quot; : {
-                        build(&quot;Aloa - TRIPAP - Import Client&quot;)
-                    }
-                )
-            }
-        }
-        stage(&quot;Lancement des imports liaison article client&quot;) {
-            steps {
-                parallel (
-                    &quot;Import Client Article&quot; : {
-                        build(&quot;Aloa - TRIPAP - Import Client_Article&quot;)
-                    }
-                )
+                sh &apos;&apos;&apos;#!/bin/bash
+                cd /var/www/html/AloaMobile/aloaMobile;
+                php bin/console app:importCsv:suiviTelephone -v;
+                &apos;&apos;&apos;
             }
         }
     }

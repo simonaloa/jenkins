@@ -12,17 +12,9 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers>
-        <hudson.triggers.TimerTrigger>
-          <spec>H/15 * * * * </spec>
-        </hudson.triggers.TimerTrigger>
-      </triggers>
-    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-    <org.jenkinsci.plugins.workflow.job.properties.DisableConcurrentBuildsJobProperty/>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
       <gogsSecret></gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
@@ -33,34 +25,28 @@
 pipeline {
     agent any
     stages {
-        stage(&quot;Récupération des fichiers export EBP&quot;) {
+        stage(&apos;Update&apos;) {
             steps {
-                parallel (
-                    &quot;Récupération&quot; : {
-                        build(&quot;Aloa - TRIPAP - Récupération des exports EBP servTripap vers servProxmox&quot;)
-                    }
-                )
+                sh &apos;&apos;&apos;#!/bin/bash
+                cd /var/www/html/AloaMobile/aloaIonic
+                git pull origin master
+                npm install
+                &apos;&apos;&apos;
             }
         }
-        stage(&quot;Lancement des imports article et client&quot;) {
+        stage(&apos;Build&apos;) {
             steps {
-                parallel (
-                    &quot;Import Article&quot; : {
-                        build(&quot;Aloa - TRIPAP - Import Article&quot;)
-                    },
-                    &quot;Import Client&quot; : {
-                        build(&quot;Aloa - TRIPAP - Import Client&quot;)
-                    }
-                )
+                sh &apos;&apos;&apos;#!/bin/bash
+                sudo runuser -l aloa -c &apos;\&apos;&apos;cd /var/www/html/AloaMobile/aloaIonic; ionic cordova build browser --prod --release&apos;\&apos;&apos;
+                &apos;&apos;&apos;
             }
         }
-        stage(&quot;Lancement des imports liaison article client&quot;) {
+        
+        stage(&apos;Deploy&apos;){
             steps {
-                parallel (
-                    &quot;Import Client Article&quot; : {
-                        build(&quot;Aloa - TRIPAP - Import Client_Article&quot;)
-                    }
-                )
+                sh &apos;&apos;&apos;#!/bin/bash
+                sudo runuser -l aloa -c &apos;\&apos;&apos;cp -r /var/www/html/AloaMobile/aloaIonic/platforms/browser/www/. /var/www/html/AloaMobile&apos;\&apos;&apos;
+                &apos;&apos;&apos;
             }
         }
     }
