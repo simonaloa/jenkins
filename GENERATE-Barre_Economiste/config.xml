@@ -1,97 +1,92 @@
-<?xml version='1.1' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description>GENERATED JOB</description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
-      <doNotScan>false</doNotScan>
-    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-  </properties>
-  <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>H 4 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.20.1">
-      <delegate>
-        <consolePrefix>SSH: </consolePrefix>
-        <delegate plugin="publish-over@0.22">
-          <publishers>
-            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.20.1">
-              <configName>ALOA.OVH</configName>
-              <verbose>false</verbose>
-              <transfers>
-                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
-                  <remoteDirectory></remoteDirectory>
-                  <sourceFiles></sourceFiles>
-                  <excludes></excludes>
-                  <removePrefix></removePrefix>
-                  <remoteDirectorySDF>false</remoteDirectorySDF>
-                  <flatten>false</flatten>
-                  <cleanRemote>false</cleanRemote>
-                  <noDefaultExcludes>false</noDefaultExcludes>
-                  <makeEmptyDirs>false</makeEmptyDirs>
-                  <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>cd barre-economiste
-										WPDBNAME=`cat wp-config.php | grep &apos;DB_NAME&apos; | cut -d \&apos; -f 4`
-										WPDBUSER=`cat wp-config.php | grep &apos;DB_USER&apos; | cut -d \&apos; -f 4`
-										WPDBPASS=`cat wp-config.php | grep &apos;DB_PASSWORD&apos; | cut -d \&apos; -f 4`
-										WPDBHOST=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 1`
-										WPDBPORT=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 2`
-										if [ &quot;$WPDBPORT&quot; == &quot;$WPDBHOST&quot; ]; then
-										echo &quot;Port non prÃ©sent pour le mysqldump&quot;
+<?xml version="1.0" encoding="UTF-8"?><project>
+	<actions/>
+	<description>GENERATED JOB</description>
+	<keepDependencies>false</keepDependencies>
+	<properties/>
+	<scm class="hudson.scm.NullSCM"/>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H 4 * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.18">
+			<delegate>
+				<consolePrefix>SSH: </consolePrefix>
+				<delegate plugin="publish-over@0.21">
+					<publishers>
+						<jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.18">
+							<configName>ALOA.OVH</configName>
+							<verbose>false</verbose>
+							<transfers>
+								<jenkins.plugins.publish__over__ssh.BapSshTransfer>
+									<remoteDirectory/>
+									<sourceFiles/>
+									<excludes/>
+									<removePrefix/>
+									<remoteDirectorySDF>false</remoteDirectorySDF>
+									<flatten>false</flatten>
+									<cleanRemote>false</cleanRemote>
+									<noDefaultExcludes>false</noDefaultExcludes>
+									<makeEmptyDirs>false</makeEmptyDirs>
+									<patternSeparator>[, ]+</patternSeparator>
+									<execCommand>cd barre-economiste
+										WPDBNAME=`cat wp-config.php | grep 'DB_NAME' | cut -d \' -f 4`
+										WPDBUSER=`cat wp-config.php | grep 'DB_USER' | cut -d \' -f 4`
+										WPDBPASS=`cat wp-config.php | grep 'DB_PASSWORD' | cut -d \' -f 4`
+										WPDBHOST=`cat wp-config.php | grep 'DB_HOST' | cut -d \' -f 4 | cut -d : -f 1`
+										WPDBPORT=`cat wp-config.php | grep 'DB_HOST' | cut -d \' -f 4 | cut -d : -f 2`
+										if [ "$WPDBPORT" == "$WPDBHOST" ]; then
+										echo "Port non prÃ©sent pour le mysqldump"
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME &gt; export_database.sql
 										else
-										echo &quot;Port prÃ©sent pour le mysqldump&quot;
+										echo "Port prÃ©sent pour le mysqldump"
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME -P $WPDBPORT &gt; export_database.sql
 										fi
 										git add . -v 
-										git commit --author=&quot;Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
+										git commit --author="Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;" -m 'Sauvegarde journaliere' | true
 									</execCommand>
-                  <execTimeout>2000000</execTimeout>
-                  <usePty>false</usePty>
-                  <useAgentForwarding>false</useAgentForwarding>
-                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
-              </transfers>
-              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-              <usePromotionTimestamp>false</usePromotionTimestamp>
-            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
-          </publishers>
-          <continueOnError>false</continueOnError>
-          <failOnError>false</failOnError>
-          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
-        </delegate>
-      </delegate>
-    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
-    <hudson.tasks.Shell>
-      <command>cd $HOME/HOME/Barre-Economiste;
+									<execTimeout>2000000</execTimeout>
+									<usePty>false</usePty>
+									<useAgentForwarding>false</useAgentForwarding>
+								</jenkins.plugins.publish__over__ssh.BapSshTransfer>
+							</transfers>
+							<useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+							<usePromotionTimestamp>false</usePromotionTimestamp>
+						</jenkins.plugins.publish__over__ssh.BapSshPublisher>
+					</publishers>
+					<continueOnError>false</continueOnError>
+					<failOnError>false</failOnError>
+					<alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+					<hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+				</delegate>
+			</delegate>
+		</jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+		<hudson.tasks.Shell>
+			<command>cd $HOME/HOME/Barre-Economiste;
 				git fetch site master
 				git reset --hard site/master
 				git push origin master -f
-				WPNAME=&apos;Barre_Economiste&apos;
-				WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
-				WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
-				URL=&apos;http://barre-economiste.fr/&apos;
-				TYPE=&apos;wordpress&apos;
-				SERV=&apos;OVH ALOA.OVH&apos;
-				curl http://aloa:Palmier-10@dev.timotheebarreteau.fr/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
+				WPNAME='Barre_Economiste'
+				WPDBVERSION=`cat wp-includes/version.php | grep "wp_version =" | cut -d \' -f 2`
+				WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d '/'`
+				URL='http://barre-economiste.fr/'
+				TYPE='wordpress'
+				SERV='OVH ALOA.OVH'
+				curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV"
 
-				declare -u UPPER_LF=&quot;Barre-Economiste&quot;
+				declare -u UPPER_LF="Barre-Economiste"
 				mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
 				~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
 				~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
 			</command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers/>
-  <buildWrappers/>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers/>
+	<buildWrappers/>
 </project>
