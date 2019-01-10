@@ -1,0 +1,46 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.29">
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
+      <gogsSecret></gogsSecret>
+      <gogsUsePayload>false</gogsUsePayload>
+    </org.jenkinsci.plugins.gogs.GogsProjectProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.60">
+    <script>#!/usr/bin/env groovy
+pipeline {
+    agent any
+    stages {
+        stage(&quot;PREREQUIS&quot;) {
+            steps {
+                sh &apos;&apos;&apos;#!/bin/bash
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-sign/OuestSignIonic; git pull origin test; npm install&apos;
+                &apos;&apos;&apos;
+            }
+        }
+        stage(&quot;BUILD&quot;) {
+            steps {
+                sh &apos;&apos;&apos;#!/bin/bash
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-sign/OuestSignIonic; ionic cordova build android --prod&apos;
+                &apos;&apos;&apos;
+            }
+        }
+        stage(&quot;COPY&quot;) {
+            steps {
+                sh &apos;&apos;&apos;#!/bin/bash
+                #ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-sign/OuestSignIonic; cp -r platforms/android/www/. ../&apos;
+                &apos;&apos;&apos;
+            }
+        }
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
