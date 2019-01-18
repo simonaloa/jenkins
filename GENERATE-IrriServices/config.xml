@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
-	<actions/>
-	<description>GENERATED JOB</description>
-	<keepDependencies>false</keepDependencies>
-	<properties/>
-	<scm class="hudson.scm.NullSCM"/>
-	<canRoam>true</canRoam>
-	<disabled>false</disabled>
-	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-	<triggers>
-		<hudson.triggers.TimerTrigger>
-			<spec>H 4 * * *</spec>
-		</hudson.triggers.TimerTrigger>
-	</triggers>
-	<concurrentBuild>false</concurrentBuild>
-	<builders>
-		<hudson.tasks.Shell>
-			<command>cd $HOME/HOME/IrriServices;
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>GENERATED JOB</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 4 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cd $HOME/HOME/IrriServices;
 				USER=irriserv
 				PASS=3uzBsjYmk6565V5T
 				HOST=ftp.cluster010.ovh.net				
@@ -24,18 +29,18 @@
 				wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 
 				git add . -v
-				git commit -m 'Sauvegarde journaliere' | true
+				git commit -m &apos;Sauvegarde journaliere&apos; | true
 				git push origin master -f | true
 				
-				WPNAME='IrriServices'
+				WPNAME=&apos;IrriServices&apos;
 				WPDBVERSION=``
 				WPPLUGIN=``
-				URL='http://www.irri-services.fr'
-				TYPE=''
-				SERV=''
-				curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV"</command>
-		</hudson.tasks.Shell>
-	</builders>
-	<publishers/>
-	<buildWrappers/>
+				URL=&apos;http://www.irri-services.fr&apos;
+				TYPE=&apos;&apos;
+				SERV=&apos;&apos;
+				curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
 </project>
