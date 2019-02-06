@@ -27,17 +27,13 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>H * * * *</spec>
+      <spec>H/5 * * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /var/lib/jenkins/HOME/VerificationLea
-
-wget -O test.html &quot;http://www.aloa-informatique.com/chantierecole/index_verif_identifiants.php?LOGIN=0553816306&amp;PASSWORD=900016&quot;;
-
-grep &quot;Validation=Vrai&quot; test.html</command>
+      <command>sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importJson -vv&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
