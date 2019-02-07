@@ -25,9 +25,10 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <authToken>qXOnm3CRTEdK985cZlj2g2AiZIC7RX7Q</authToken>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>H/5 * * * *</spec>
+      <spec>* * * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
