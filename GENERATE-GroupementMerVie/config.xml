@@ -21,29 +21,30 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd $HOME/HOME/GroupementMerVie;
-				USER=groupemebh
-				PASS=Palmier10Palmier10
-				HOST=ftp.cluster020.hosting.ovh.net				
-				
-				wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
+      <command>#!/bin/bash
+cd $HOME/HOME/GroupementMerVie;
+USER=groupemebh
+PASS=Palmier10Palmier10
+HOST=ftp.cluster020.hosting.ovh.net				
 
-				git add . -v
-				git commit -m &apos;Sauvegarde journaliere&apos; | true
-				git push origin master -f | true
-				
-				WPNAME=&apos;GroupementMerVie&apos;
-				WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
-				WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
-				URL=&apos;https://www.groupement-mer-vie.fr/&apos;
-				TYPE=&apos;wordpress&apos;
-				SERV=&apos;&apos;
-				curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
+wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 
-				declare -u UPPER_LF=&quot;GroupementMerVie&quot;
-				mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
-				~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
-				~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
+git add . -v
+git commit -m &apos;Sauvegarde journaliere&apos; | true
+git push origin master -f | true
+
+WPNAME=&apos;GroupementMerVie&apos;
+WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
+WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
+URL=&apos;https://www.groupement-mer-vie.fr/&apos;
+TYPE=&apos;wordpress&apos;
+SERV=&apos;&apos;
+curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
+
+declare -u UPPER_LF=&quot;GroupementMerVie&quot;
+mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
+~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
+~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
 			</command>
     </hudson.tasks.Shell>
   </builders>

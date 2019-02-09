@@ -73,23 +73,24 @@
       </delegate>
     </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
     <hudson.tasks.Shell>
-      <command>cd $HOME/HOME/Evea;
-				git fetch site master
-				git reset --hard site/master
-				git push origin master -f
+      <command>#!/bin/bash
+cd $HOME/HOME/Evea;
+git fetch site master
+git reset --hard site/master
+git push origin master -f
 
-				WPNAME=Evea
-				WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
-				WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
-				URL=&apos;http://evea.asso.fr/&apos;
-				TYPE=&apos;wordpress&apos;
-				SERV=&apos;OVH ALOA.INFO&apos;
-				curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
+WPNAME=Evea
+WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
+WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
+URL=&apos;http://evea.asso.fr/&apos;
+TYPE=&apos;wordpress&apos;
+SERV=&apos;OVH ALOA.INFO&apos;
+curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
 
-				declare -u UPPER_LF=&quot;Evea&quot;
-				mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
-				~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
-				~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
+declare -u UPPER_LF=&quot;Evea&quot;
+mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
+~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
+~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
 			</command>
     </hudson.tasks.Shell>
   </builders>
