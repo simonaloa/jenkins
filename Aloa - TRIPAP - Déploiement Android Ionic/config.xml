@@ -1,0 +1,59 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.29">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
+      <gogsSecret></gogsSecret>
+      <gogsUsePayload>false</gogsUsePayload>
+    </org.jenkinsci.plugins.gogs.GogsProjectProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.60">
+    <script>#!/usr/bin/env groovy
+
+import groovy.json.JsonOutput
+
+def slackNotificationChannel = &apos;reports&apos;
+
+def notifySlack(text, channel, attachments) {
+	def slackURL = &apos;https://hooks.slack.com/services/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&apos;
+		def jenkinsIcon = &apos;https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png&apos;
+
+		def payload = JsonOutput.toJson([text: text,
+				channel: channel,
+				username: &quot;Jenkins NS36&quot;,
+				icon_url: jenkinsIcon,
+				attachments: attachments
+		])
+
+		sh &quot;curl -X POST --data-urlencode \&apos;payload=${payload}\&apos; ${slackURL}&quot;
+}
+
+timestamps {
+	node () {
+		try{
+			stage (&apos;NS36 - Requirments and build&apos;) {
+				sh &apos;&apos;&apos;export ANDROID_HOME=/var/lib/jenkins/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+cd /var/lib/jenkins/HOME/Tripapyrus_planning_android_releases;
+git pull origin master;
+npm install;
+ionic cordova build android --prod
+scp /var/lib/jenkins/HOME/Tripapyrus_planning_android_releases/platforms/android/app/build/outputs/apk/debug/app-debug.apk tripapyrpa@ftp.tripapyrus.com:/homez.2015/tripapyrpa/planning/android/app.apk&apos;&apos;&apos;
+			}
+		} catch (e) {
+			notifySlack(&quot;[Tripapyrus] Problème lors de la génération du APK&quot;, slackNotificationChannel, [])
+			sh &quot;exit 1&quot;
+		}
+	}
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
