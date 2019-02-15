@@ -11,6 +11,13 @@
       <gogsSecret></gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <hudson.triggers.TimerTrigger>
+          <spec>H * * * *</spec>
+        </hudson.triggers.TimerTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
   <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.60">
     <script>#!/usr/bin/env groovy
@@ -33,27 +40,23 @@ def notifySlack(text, channel, attachments) {
 		sh &quot;curl -X POST --data-urlencode \&apos;payload=${payload}\&apos; ${slackURL}&quot;
 }
 
-
 timestamps {
-    node () {
-    	stage (&apos;Aloa - TRIPAP - Déploiement TripapyrusPlanning - Build&apos;) {
-            sh &quot;&quot;&quot; 
-            cd /var/lib/jenkins/HOME/Tripapyrus_planning
-            git fetch origin reajax &amp;&amp; git reset --hard origin/reajax
-            npm install 
-            ionic cordova build browser --prod
-            cp -r platforms/browser/www/* ../Tripapyrus_planning_browser_releases
-            cd /var/lib/jenkins/HOME/Tripapyrus_planning_browser_releases
-            git add . -v
-            git commit -m &apos;Commit auto&apos; | true
-            git push origin master | true
-            git push site master | true
-            ssh tripapyrpa@ftp.tripapyrus.com &apos;cd planning; git checkout -f&apos; 
-             &quot;&quot;&quot; 
-    	}
-    }
-}</script>
-    <sandbox>false</sandbox>
+	node () {
+		try{
+		    stage(&apos;Génération des BL&apos;) {
+		        sh &apos;sudo runuser -l aloa -c \&apos;cd /var/www/html/Tripapyrus; php bin/console app:exportEbpBl;\&apos;&apos;
+			}
+			stage(&apos;Copie des BL&apos;) {
+			    sh &apos;scp /var/www/html/Tripapyrus/public/exports/* tripapyrpa@ftp.tripapyrus.com:/homez.2015/tripapyrpa/planning_bl_to_ebp/&apos;
+			}
+		} catch (e) {
+			notifySlack(&quot;[TRIPAP] Problème de copie des BL&quot;, slackNotificationChannel, [])
+				sh &quot;exit 1&quot;
+		}
+	}
+}
+</script>
+    <sandbox>true</sandbox>
   </definition>
   <triggers/>
   <disabled>false</disabled>
