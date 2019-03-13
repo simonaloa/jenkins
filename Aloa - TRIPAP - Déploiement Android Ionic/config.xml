@@ -55,5 +55,5 @@ scp /var/lib/jenkins/HOME/Tripapyrus_planning_android_releases/platforms/android
     <sandbox>true</sandbox>
   </definition>
   <triggers/>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
 </flow-definition>

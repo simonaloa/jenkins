@@ -24,43 +24,17 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.19.1">
-      <delegate>
-        <consolePrefix>SSH: </consolePrefix>
-        <delegate plugin="publish-over@0.22">
-          <publishers>
-            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.19.1">
-              <configName>VPS49</configName>
-              <verbose>false</verbose>
-              <transfers>
-                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
-                  <remoteDirectory></remoteDirectory>
-                  <sourceFiles></sourceFiles>
-                  <excludes></excludes>
-                  <removePrefix></removePrefix>
-                  <remoteDirectorySDF>false</remoteDirectorySDF>
-                  <flatten>false</flatten>
-                  <cleanRemote>false</cleanRemote>
-                  <noDefaultExcludes>false</noDefaultExcludes>
-                  <makeEmptyDirs>false</makeEmptyDirs>
-                  <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>runuser -l aloa -c &apos;cd solution_ce; mysqldump -u solution_ce -p&apos;Palmier-10&apos; solution_ce_adapei &gt; ../database_saves/ADAPEI/export_database_$(date +%Y-%m-%d).sql&apos;</execCommand>
-                  <execTimeout>120000</execTimeout>
-                  <usePty>false</usePty>
-                  <useAgentForwarding>false</useAgentForwarding>
-                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
-              </transfers>
-              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-              <usePromotionTimestamp>false</usePromotionTimestamp>
-            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
-          </publishers>
-          <continueOnError>false</continueOnError>
-          <failOnError>false</failOnError>
-          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
-        </delegate>
-      </delegate>
-    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+    <hudson.tasks.Shell>
+      <command># Sauvegarde db sur la PROD
+ssh root@vps490005.ovh.net &quot;runuser -l aloa -c &apos;cd solution_ce; mysqldump -u solution_ce -p\&quot;Palmier-10\&quot; solution_ce_adapei &gt; ../database_saves/ADAPEI/export_database_$(date +%Y-%m-%d).sql&apos;&quot;
+
+# Récupération des sauvegardes db de la PROD
+cd /var/lib/jenkins/HOME/WebCE_Adapei/database_saves/
+rsync -avz root@vps490005.ovh.net:/var/www/database_saves/ADAPEI/ .
+
+# Suppression des sauvegardes db sur la PROD
+ssh root@vps490005.ovh.net &apos;rm -r /var/www/database_saves/ADAPEI/*&apos;</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers/>
