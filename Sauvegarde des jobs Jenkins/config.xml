@@ -17,12 +17,19 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 8 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importCsvEbp article -vv&apos;
-ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus; php bin/console app:importCsvEbp article -vv&apos;</command>
+      <command>cd /var/lib/jenkins/jobs
+git add . -v 
+git commit -m &apos;Sauvegarde auto des jobs Jenkins NS36&apos; || true
+git push origin master
+git push ns300 master</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

@@ -23,7 +23,7 @@
     <hudson.tasks.Shell>
       <command>ssh tripapyrpa@ftp.tripapyrus.com &apos;git add . -v; git commit -m &quot;Sauvegarde auto&quot; | true&apos;
 
-sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus_EBP; git pull depot master;&apos;</command>
+ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus_EBP; git pull depot master;&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

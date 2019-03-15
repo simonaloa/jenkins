@@ -44,14 +44,14 @@ timestamps {
 	node () {
 		try{
 		    stage(&apos;Génération des BL&apos;) {
-		        sh &apos;sudo runuser -l aloa -c \&apos;cd /var/www/html/Tripapyrus; php bin/console app:exportEbpBl;\&apos;&apos;
+		        sh &apos;ssh aloa@vps490005.ovh.net \&apos;cd /var/www/Tripapyrus; php bin/console app:exportEbpBl;\&apos;&apos;
 			}
 			stage(&apos;Copie des BL&apos;) {
-			    sh &apos;scp /var/www/html/Tripapyrus/public/exports/* tripapyrpa@ftp.tripapyrus.com:/homez.2015/tripapyrpa/planning_bl_to_ebp/&apos;
+			    sh &apos;ssh aloa@vps490005.ovh.net \&apos;scp /var/www/Tripapyrus/public/exports/* tripapyrpa@ftp.tripapyrus.com:/homez.2015/tripapyrpa/planning_bl_to_ebp/\&apos;&apos;
 			}
 		} catch (e) {
 			notifySlack(&quot;[TRIPAP] Problème de copie des BL&quot;, slackNotificationChannel, [])
-				sh &quot;exit 1&quot;
+			sh &quot;exit 1&quot;
 		}
 	}
 }

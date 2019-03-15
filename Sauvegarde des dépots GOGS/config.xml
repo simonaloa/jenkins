@@ -17,12 +17,16 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 7 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importCsvEbp article -vv&apos;
-ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus; php bin/console app:importCsvEbp article -vv&apos;</command>
+      <command>rsync -avz /home/gogs/gogs-repositories/ aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/gogs/
+sudo runuser -l gogs -c &apos;/opt/gogs/gogs backup --database-only --config=/etc/gogs/conf/app.ini&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

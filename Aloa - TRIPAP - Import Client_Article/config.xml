@@ -1,5 +1,6 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
+  <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -20,7 +21,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importCsvEbp client_article -vv&apos;</command>
+      <command># sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importCsvEbp client_article -vv&apos;
+ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus; php bin/console app:importCsvEbp client_article -vv&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

@@ -34,7 +34,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importJson -vv&apos;</command>
+      <command># sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:importJson -vv&apos;
+ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus; php bin/console app:importJson -vv&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
