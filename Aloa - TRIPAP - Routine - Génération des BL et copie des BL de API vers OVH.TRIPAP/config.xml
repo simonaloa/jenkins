@@ -1,0 +1,63 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.29">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
+      <gogsSecret></gogsSecret>
+      <gogsUsePayload>false</gogsUsePayload>
+    </org.jenkinsci.plugins.gogs.GogsProjectProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <hudson.triggers.TimerTrigger>
+          <spec>H * * * *</spec>
+        </hudson.triggers.TimerTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.60">
+    <script>#!/usr/bin/env groovy
+
+import groovy.json.JsonOutput
+
+def slackNotificationChannel = &apos;reports&apos;
+
+def notifySlack(text, channel, attachments) {
+	def slackURL = &apos;https://hooks.slack.com/services/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&apos;
+		def jenkinsIcon = &apos;https://wiki.jenkins-ci.org/download/attachments/2916393/logo.png&apos;
+
+		def payload = JsonOutput.toJson([text: text,
+				channel: channel,
+				username: &quot;Jenkins NS300&quot;,
+				icon_url: jenkinsIcon,
+				attachments: attachments
+		])
+
+		sh &quot;curl -X POST --data-urlencode \&apos;payload=${payload}\&apos; ${slackURL}&quot;
+}
+
+timestamps {
+	node () {
+		try{
+		    stage(&apos;Génération des BL&apos;) {
+		        sh &apos;ssh aloa@vps490005.ovh.net \&apos;cd /var/www/Tripapyrus; php bin/console app:exportEbpBl;\&apos;&apos;
+			}
+			stage(&apos;Copie des BL&apos;) {
+			    sh &apos;ssh aloa@vps490005.ovh.net \&apos;scp /var/www/Tripapyrus/public/exports/* tripapyrpa@ftp.tripapyrus.com:/homez.2015/tripapyrpa/planning_bl_to_ebp/\&apos;&apos;
+			}
+		} catch (e) {
+			notifySlack(&quot;[TRIPAP] Problème de copie des BL&quot;, slackNotificationChannel, [])
+			sh &quot;exit 1&quot;
+		}
+	}
+}
+</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
