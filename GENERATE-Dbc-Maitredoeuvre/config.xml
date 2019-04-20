@@ -7,6 +7,10 @@
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
+      <gogsSecret></gogsSecret>
+      <gogsUsePayload>false</gogsUsePayload>
+    </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
@@ -27,6 +31,7 @@ USER=dbcmaitrlu
 PASS=PMpjHKQdCpuP
 HOST=ftp.cluster007.ovh.net				
 
+rm -rf *
 wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 
 git add . -v
