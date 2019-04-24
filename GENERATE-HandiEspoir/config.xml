@@ -36,7 +36,7 @@ git push origin master -f
 WPNAME=&apos;HandiEspoir&apos;
 WPDBVERSION=`cat language/en-GB/en-GB.xml | grep &quot;&lt;version&gt;&quot; | cut -d &apos;&gt;&apos; -f 2 | cut -d &apos;&lt;&apos; -f 1`
 WPPLUGIN=&apos;&apos;
-URL=&apos;http://www.handiespoir.fr/pvad/&apos;
+URL=&apos;http://www.handiespoir.fr/&apos;
 TYPE=&apos;joomla&apos;
 SERV=&apos;&apos;
 curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
