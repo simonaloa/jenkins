@@ -20,64 +20,17 @@
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.20.1">
-      <delegate>
-        <consolePrefix>SSH: </consolePrefix>
-        <delegate plugin="publish-over@0.22">
-          <publishers>
-            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.20.1">
-              <configName>ALOA.OVH</configName>
-              <verbose>false</verbose>
-              <transfers>
-                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
-                  <remoteDirectory></remoteDirectory>
-                  <sourceFiles></sourceFiles>
-                  <excludes></excludes>
-                  <removePrefix></removePrefix>
-                  <remoteDirectorySDF>false</remoteDirectorySDF>
-                  <flatten>false</flatten>
-                  <cleanRemote>false</cleanRemote>
-                  <noDefaultExcludes>false</noDefaultExcludes>
-                  <makeEmptyDirs>false</makeEmptyDirs>
-                  <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>
-										cd aob-tools
-										WPDBNAME=`cat configuration.php | grep &apos;$db &apos; | cut -d \&apos; -f 2`
-										WPDBUSER=`cat configuration.php | grep &apos;$$user &apos; | cut -d \&apos; -f 2`
-										WPDBPASS=`cat configuration.php | grep &apos;$password &apos; | cut -d \&apos; -f 2`
-										WPDBHOST=`cat configuration.php | grep &apos;$host &apos; | cut -d \&apos; -f 2 | cut -d : -f 1`
-										WPDBPORT=`cat configuration.php | grep &apos;$host &apos; | cut -d \&apos; -f 2 | cut -d : -f 2`
-										if [ &quot;$WPDBPORT&quot; == &quot;$WPDBHOST&quot; ]; then
-										echo &quot;Port non prÃ©sent pour le mysqldump&quot;
-										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME &gt; export_database.sql
-										else
-										echo &quot;Port prÃ©sent pour le mysqldump&quot;
-										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME -P $WPDBPORT &gt; export_database.sql
-										fi
-										git add . -v 
-										git commit --author=&quot;Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
-										</execCommand>
-                  <execTimeout>2000000</execTimeout>
-                  <usePty>false</usePty>
-                  <useAgentForwarding>false</useAgentForwarding>
-                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
-              </transfers>
-              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-              <usePromotionTimestamp>false</usePromotionTimestamp>
-            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
-          </publishers>
-          <continueOnError>false</continueOnError>
-          <failOnError>false</failOnError>
-          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
-        </delegate>
-      </delegate>
-    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 cd $HOME/HOME/Aob-Tools;
-git fetch site master 
-git reset --hard site/master
+USER=aobtools
+PASS=Palmier-21
+HOST=ftp.onlinux-fr.setupdns.net				
+
+wget -mnH --cut-dirs=2 ftp://$USER:$PASS@$HOST/public/www -X public/www/.git
+
+git add . -v
+git commit -m &apos;Sauvegarde journaliere&apos; | true
 git push origin master -f
 
 WPNAME=&apos;Aob-Tools&apos;
@@ -85,7 +38,7 @@ WPDBVERSION=`cat language/en-GB/en-GB.xml | grep &quot;&lt;version&gt;&quot; | c
 WPPLUGIN=&apos;&apos;
 URL=&apos;http://www.aob-tools.com&apos;
 TYPE=&apos;joomla&apos;
-SERV=&apos;OVH ALOA.OVH&apos;
+SERV=&apos;&apos;
 curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
 			</command>
     </hudson.tasks.Shell>
