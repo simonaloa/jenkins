@@ -21,7 +21,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ssh tripapyrpa@ftp.tripapyrus.com &apos;git add . -v; git commit -m &quot;Sauvegarde auto&quot; | true&apos;
+      <command>ssh tripapyrpa@ftp.cluster011.hosting.ovh.net &apos;git add . -v; git commit -m &quot;Sauvegarde auto&quot; | true&apos;
 
 ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus_EBP; git pull depot master;&apos;</command>
     </hudson.tasks.Shell>
