@@ -37,6 +37,8 @@ pipeline {
         stage(&apos;Build&apos;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
+                cd /var/www/html/AloaMobile/aloaIonic;
+                sudo chown aloa:www-data . -R
                 sudo runuser -l aloa -c &apos;\&apos;&apos;cd /var/www/html/AloaMobile/aloaIonic; ionic cordova build browser --prod --release&apos;\&apos;&apos;
                 &apos;&apos;&apos;
             }
