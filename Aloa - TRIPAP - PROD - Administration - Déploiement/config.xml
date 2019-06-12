@@ -45,10 +45,10 @@ timestamps {
             cp -r platforms/browser/www/* ../Tripapyrus_planning_browser_releases
             cd /var/lib/jenkins/HOME/Tripapyrus_planning_browser_releases
             git add . -v
-            git commit -m &apos;Commit auto&apos; | true
-            git push origin master | true
-            git push site master | true
-            ssh tripapyrpa@ftp.tripapyrus.com &apos;cd planning; git checkout -f&apos; 
+            git commit -m &apos;Commit auto&apos;
+            git push origin master
+            git push site master
+            ssh tripapyrpa@ftp.cluster011.hosting.ovh.net &apos;cd planning; git checkout -f&apos; 
              &quot;&quot;&quot; 
     	}
     }
