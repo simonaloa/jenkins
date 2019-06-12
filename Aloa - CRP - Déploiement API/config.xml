@@ -21,12 +21,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /var/www/html/CrpClients/CrpApi;
-git pull origin master;
-composer install;
-php bin/console cache:clear;
-sudo chown aloa:www-data -R .
-chmod 775 -R .</command>
+      <command>sudo runuser -l aloa -c &apos;cd /var/www/html/CrpClients/CrpApi; git pull origin master; make;&apos;
+
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
