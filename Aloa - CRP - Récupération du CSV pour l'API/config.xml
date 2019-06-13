@@ -1,5 +1,6 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
+  <actions/>
   <description>Récupération du CSV nécessaire à l&apos;API CRP depuis le serveur aloa.ovh</description>
   <keepDependencies>false</keepDependencies>
   <properties>
@@ -20,8 +21,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># COPY de aloa.ovh vers dev.aloainformatique.eu (Local boite)
-# En attente de l&apos;ouverture des ports sur le firewall ALOA</command>
+      <command>scp aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/CRP_EXPORT_TMP_DIR/query.csv /var/www/html/CrpClients/CrpApi/public/query.csv
+# php bin/console app:importCsv
+
+# COPY de aloa.ovh vers dev.aloainformatique.eu (Local boite) (FUTUR)</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
