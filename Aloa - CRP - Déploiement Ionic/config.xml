@@ -21,7 +21,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sudo runuser -l aloa -c &apos;cd /var/www/html/CrpClients/CrpIonic; make deploy;&apos;</command>
+      <command>ssh dev@crp.aloa-informatique.com -p 2222 &apos;cd /var/www/html/CrpClient/CrpIonic; bash; make deploy;&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

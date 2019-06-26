@@ -17,14 +17,18 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 9,14 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>scp aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/CRP_EXPORT_TMP_DIR/query.csv /var/www/html/CrpClients/CrpApi/public/query.csv
-# php bin/console app:importCsv
+      <command>scp aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/CRP_EXPORT_TMP_DIR/query.csv .
+scp -P 2222 query.csv dev@crp.aloa-informatique.com:/var/www/html/CrpClient/CrpApi/public/query.csv
 
-# COPY de aloa.ovh vers dev.aloainformatique.eu (Local boite) (FUTUR)</command>
+ssh -p 2222 dev@crp.aloa-informatique.com &apos;cd /var/www/html/CrpClient/CrpApi; php bin/console app:importCsv&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
