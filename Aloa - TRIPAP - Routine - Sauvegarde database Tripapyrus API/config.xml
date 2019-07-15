@@ -26,8 +26,11 @@
   <builders>
     <hudson.tasks.Shell>
       <command># SAUVEGARDE DE LA BASE DE DONEES TRIPAPYRUS (Application)
-# sudo runuser -l aloa -c &apos;mysqldump -u root -p&quot;Palmier-10&quot; tripapyrus &gt; /var/www/database_saves/TRIPAPYRUS/export_database_$(date +%Y-%m-%d).sql&apos;
-ssh aloa@vps490005.ovh.net &apos;mysqldump -u root -p&quot;Palmier-10&quot; tripapyrus &gt; /var/www/database_saves/TRIPAPYRUS/export_database_$(date +%Y-%m-%d).sql&apos;</command>
+ssh aloa@vps490005.ovh.net &apos;mysqldump -u root -p&quot;Palmier-10&quot; tripapyrus &gt; /var/www/database_saves/TRIPAPYRUS/export_database_$(date +%Y-%m-%d).sql&apos;
+# Récupération des sauvegardes des bases de données de TRIPAPYRUS sur PROXMOX
+scp -r aloa@vps490005.ovh.net:/var/www/database_saves/TRIPAPYRUS/ /var/lib/jenkins/HOME/Tripapyrus_Sauvegardes/
+# Il faut faire de la place sur ce putin de VPS de merde
+ssh aloa@vps490005.ovh.net &apos;rm /var/www/database_saves/TRIPAPYRUS/*&apos;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
