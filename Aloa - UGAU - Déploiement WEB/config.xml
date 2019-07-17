@@ -2,6 +2,12 @@
 <flow-definition plugin="workflow-job@2.29">
   <actions>
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.3.2"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.3.2">
+      <jobProperties/>
+      <triggers/>
+      <parameters/>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
   </actions>
   <description></description>
   <keepDependencies>false</keepDependencies>
@@ -22,21 +28,21 @@ pipeline {
         stage(&quot;PREREQUIS&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-sign/OuestSignIonic; git pull origin test; npm install&apos;
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; git fetch origin v3 &amp;&amp; git reset --hard origin/v3; npm install&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;BUILD&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-sign/OuestSignIonic; ionic cordova build browser --prod&apos;
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; ionic cordova build browser --prod&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-sign/OuestSignIonic; cp -r platforms/browser/www/. ../&apos;
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; cp -r platforms/browser/www/. ../../&apos;
                 &apos;&apos;&apos;
             }
         }
