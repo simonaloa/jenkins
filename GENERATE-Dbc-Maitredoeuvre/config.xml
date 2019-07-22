@@ -25,7 +25,7 @@
 cd $HOME/HOME/DbcMaitredoeuvre;
 USER=dbcmaitrlu
 PASS=PMpjHKQdCpuP
-HOST=ftp.cluster007.ovh.net				
+HOST=ftp.cluster007.hosting.ovh.net				
 
 wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 
