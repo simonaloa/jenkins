@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
-	<actions/>
-	<description>GENERATED JOB</description>
-	<keepDependencies>false</keepDependencies>
-	<properties/>
-	<scm class="hudson.scm.NullSCM"/>
-	<canRoam>true</canRoam>
-	<disabled>false</disabled>
-	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-	<triggers>
-		<hudson.triggers.TimerTrigger>
-			<spec>H 4 * * *</spec>
-		</hudson.triggers.TimerTrigger>
-	</triggers>
-	<concurrentBuild>false</concurrentBuild>
-	<builders>
-		<hudson.tasks.Shell>
-			<command>#!/bin/bash
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>GENERATED JOB</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 4 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
 cd $HOME/HOME/DbcMaitredoeuvre;
 USER=dbcmaitrlu
 PASS=PMpjHKQdCpuP
@@ -25,20 +30,20 @@ HOST=ftp.cluster007.hosting.ovh.net
 wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 
 git add . -v
-git commit -m 'Sauvegarde journaliere' | true
+git commit -m &apos;Sauvegarde journaliere&apos; | true
 git push origin master -f
 
-WPNAME='Dbc-Maitredoeuvre'
-WPDBVERSION=`cat language/en-GB/en-GB.xml | grep "&lt;version&gt;" | cut -d '&gt;' -f 2 | cut -d '&lt;' -f 1`
-WPPLUGIN=''
-URL='http://www.dbc-maitredoeuvre.fr/'
-TYPE='joomla'
-SERV=''
-FAVICON='http://www.dbc-maitredoeuvre.fr/templates/dbc_accueil/favicon.ico'
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON"
+WPNAME=&apos;Dbc-Maitredoeuvre&apos;
+WPDBVERSION=`cat language/en-GB/en-GB.xml | grep &quot;&lt;version&gt;&quot; | cut -d &apos;&gt;&apos; -f 2 | cut -d &apos;&lt;&apos; -f 1`
+WPPLUGIN=&apos;&apos;
+URL=&apos;http://www.dbc-maitredoeuvre.fr/&apos;
+TYPE=&apos;joomla&apos;
+SERV=&apos;&apos;
+FAVICON=&apos;http://www.dbc-maitredoeuvre.fr/templates/dbc_accueil/favicon.ico&apos;
+curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
 			</command>
-		</hudson.tasks.Shell>
-	</builders>
-	<publishers/>
-	<buildWrappers/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
 </project>
