@@ -39,7 +39,8 @@ WPPLUGIN=&apos;&apos;
 URL=&apos;http://www.handiespoir.fr/&apos;
 TYPE=&apos;joomla&apos;
 SERV=&apos;&apos;
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&quot;
+FAVICON=&apos;http://www.handiespoir.fr/templates/handi_espoir_2/favicon.ico&apos;
+curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
 			</command>
     </hudson.tasks.Shell>
   </builders>
