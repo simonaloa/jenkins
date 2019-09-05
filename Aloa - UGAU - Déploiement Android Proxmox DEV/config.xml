@@ -31,10 +31,10 @@ scp app-debug.apk aloa@192.168.1.8:/var/www/ouest-signalisation/android/app-debu
 
 echo &quot;From: jenkins@dev.aloa.ovh&quot; &gt; ./mail_auto;
 echo &quot;To: timothee@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
-echo &quot;Cc: timotheebarreteau@gmail.com&quot; &gt;&gt; ./mail_auto;
+echo &quot;Cc: o-s@ouest-signalisation.fr&quot; &gt;&gt; ./mail_auto;
 echo &quot;Subject: Generation de l&apos;APK pour l&apos;application UGAU&quot; &gt;&gt; ./mail_auto;
 echo &quot;&quot; &gt;&gt; ./mail_auto;
-echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGUAU vient d&apos;être générée à l&apos;adresse http://ouest-sign.dev.timotheebarreteau.fr/android/app-debug.apk\n\nCordialement,&quot; &gt;&gt; ./mail_auto;
+echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGUAU vient d&apos;être générée à l&apos;adresse http://ouest-sign.dev.timotheebarreteau.fr/android/app-debug.apk\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
 cat ./mail_auto | /usr/sbin/sendmail -t;
 rm ./mail_auto</command>
     </hudson.tasks.Shell>
