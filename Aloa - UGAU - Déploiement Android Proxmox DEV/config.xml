@@ -8,7 +8,7 @@
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret>Palmier-10Palmier-10</gogsSecret>
+      <gogsSecret>timotheebarreteau@gmail.com</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
@@ -25,7 +25,7 @@
 git fetch origin refont &amp;&amp; git reset --hard origin/refont; 
 npm install
 #/usr/lib/android-sdk/tools/bin/sdkmanager --licenses
-ionic cordova build android --prod
+cross-env ENV=&apos;prod&apos; ionic cordova build android --prod
 cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk .
 scp app-debug.apk aloa@192.168.1.8:/var/www/ouest-signalisation/android/app-debug.apk
 
@@ -36,7 +36,7 @@ echo &quot;Cc: olivier@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
 echo &quot;Cc: michel@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
 echo &quot;Subject: Generation de l&apos;APK pour l&apos;application UGAU&quot; &gt;&gt; ./mail_auto;
 echo &quot;&quot; &gt;&gt; ./mail_auto;
-echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGUAU vient d&apos;être générée à l&apos;adresse http://ouest-sign.dev.timotheebarreteau.fr/android/app-debug.apk\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
+echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGUAU vient d&apos;être générée à l&apos;adresse http://ouest-sign.dev.timotheebarreteau.fr/android/app-debug.apk\nAttention, il est possible que l&apos;application ne soit pas fonctionnelle après installation : Il faut effacer les données de l&apos;application dans les parametres android\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
 cat ./mail_auto | /usr/sbin/sendmail -t;
 rm ./mail_auto</command>
     </hudson.tasks.Shell>
