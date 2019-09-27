@@ -16,7 +16,7 @@
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret></gogsSecret>
+      <gogsSecret>Palmier-10</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
@@ -35,7 +35,7 @@ pipeline {
         stage(&quot;BUILD&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; ionic cordova build browser --prod&apos;
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; /usr/bin/cross-env ENV=&apos;prod&apos; ionic cordova build browser --prod&apos;
                 &apos;&apos;&apos;
             }
         }
@@ -48,7 +48,7 @@ pipeline {
         }
     }
 }</script>
-    <sandbox>true</sandbox>
+    <sandbox>false</sandbox>
   </definition>
   <triggers/>
   <disabled>false</disabled>
