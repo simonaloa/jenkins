@@ -8,7 +8,7 @@
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret></gogsSecret>
+      <gogsSecret>Palmier-10</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
@@ -41,7 +41,7 @@ timestamps {
             cd /var/lib/jenkins/HOME/Tripapyrus_planning
             git fetch origin planning &amp;&amp; git reset --hard origin/planning
             npm install 
-            ionic cordova build browser --prod
+            ionic cordova build browser
             cp -r platforms/browser/www/* ../Tripapyrus_planning_browser_releases
             cd /var/lib/jenkins/HOME/Tripapyrus_planning_browser_releases
             git add . -v
