@@ -24,7 +24,7 @@
       <command>cd /var/lib/jenkins/HOME/Ugau_IonicAndroid; 
 git fetch origin refont &amp;&amp; git reset --hard origin/refont; 
 npm install
-#/usr/lib/android-sdk/tools/bin/sdkmanager --licenses
+
 cross-env ENV=&apos;saintgilles&apos; ionic cordova build android --prod
 cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk .
 scp app-debug.apk debian@147.135.130.166:/var/www/SaintGillesCroixDeVie/admin/app-ugau.apk
