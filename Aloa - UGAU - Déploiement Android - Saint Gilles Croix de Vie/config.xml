@@ -21,7 +21,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /var/lib/jenkins/HOME/Ugau_IonicAndroid; 
+      <command>cd /var/lib/jenkins/HOME/Ugau_IonicAndroid_SaintGillesCroixDeVie; 
 git fetch origin refont &amp;&amp; git reset --hard origin/refont; 
 npm install
 
