@@ -109,6 +109,11 @@
         <hudson.triggers.TimerTrigger reference="../../../org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty/triggers/hudson.triggers.TimerTrigger"/>
       </triggers>
     </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <hudson.triggers.TimerTrigger reference="../../../org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty/triggers/hudson.triggers.TimerTrigger"/>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
