@@ -25,12 +25,13 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>nc -zvw3 aloainformatique.com 3389</command>
+      <command>nc -zvw3 aloainformatique.com 3389
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
     <hudson.tasks.Mailer plugin="mailer@1.22">
-      <recipients>timothee@aloa-informatique.com</recipients>
+      <recipients>timothee@aloa-informatique.com olivier@aloa-informatique.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
