@@ -42,7 +42,7 @@ pipeline {
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; scp -r platforms/browser/www/* debian@147.135.130.166:/var/www/ugau_developpement/admin/&apos;                &apos;&apos;&apos;
+ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; scp -r platforms/browser/www/* aloa@147.135.130.166:/var/www/ugau_developpement/admin/&apos;                &apos;&apos;&apos;
             }
         }
     }

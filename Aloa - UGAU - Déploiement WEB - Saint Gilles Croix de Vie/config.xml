@@ -16,7 +16,7 @@
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret>Palmier-10</gogsSecret>
+      <gogsSecret>Palmier-10Palmier-10</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
@@ -42,7 +42,7 @@ pipeline {
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; scp -r platforms/browser/www/* debian@147.135.130.166:/var/www/SaintGillesCroixDeVie/admin/&apos;
+                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; scp -r platforms/browser/www/* aloa@147.135.130.166:/var/www/SaintGillesCroixDeVie/admin/&apos;
                 &apos;&apos;&apos;
             }
         }
