@@ -16,7 +16,7 @@
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret>Palmier-10</gogsSecret>
+      <gogsSecret>Palmier-10Palmier-10</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
@@ -28,28 +28,28 @@ pipeline {
         stage(&quot;PREREQUIS&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; git fetch origin v3 &amp;&amp; git reset --hard origin/v3; npm install&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintAndreTreizeVoies/ionic_admin; git fetch origin v3 &amp;&amp; git reset --hard origin/v3; npm install&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;BUILD&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; /usr/bin/cross-env ENV=&apos;dev&apos; ionic cordova build browser --prod&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintAndreTreizeVoies/ionic_admin; /usr/bin/cross-env ENV=&apos;saintandretreizevoies&apos; ionic cordova build browser --prod&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; cp -r platforms/browser/www/* /var/www/ugau_developpement/admin/&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintAndreTreizeVoies/ionic_admin; cp -r platforms/browser/www/* /var/www/SaintAndreTreizeVoies/admin/&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;CHOWN CHMOD&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement; chown aloa:www-data . -R&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintAndreTreizeVoies; chown aloa:www-data . -R&apos;
                 &apos;&apos;&apos;
             }
         }

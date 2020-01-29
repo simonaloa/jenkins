@@ -28,21 +28,28 @@ pipeline {
         stage(&quot;PREREQUIS&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; git fetch origin v3 &amp;&amp; git reset --hard origin/v3; npm install&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintGillesCroixDeVie/ionic_admin; git fetch origin v3 &amp;&amp; git reset --hard origin/v3; npm install&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;BUILD&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; /usr/bin/cross-env ENV=&apos;saintgilles&apos; ionic cordova build browser --prod&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintGillesCroixDeVie/ionic_admin; /usr/bin/cross-env ENV=&apos;saintgilles&apos; ionic cordova build browser --prod&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@192.168.1.8 &apos;cd /var/www/ouest-signalisation/V3/ionic; scp -r platforms/browser/www/* aloa@147.135.130.166:/var/www/SaintGillesCroixDeVie/admin/&apos;
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintGillesCroixDeVie/ionic_admin; cp -r platforms/browser/www/* /var/www/SaintGillesCroixDeVie/admin/&apos;
+                &apos;&apos;&apos;
+            }
+        }
+        stage(&quot;CHOWN CHMOD&quot;) {
+            steps {
+                sh &apos;&apos;&apos;#!/bin/bash
+                ssh root@147.135.130.166 &apos;cd /var/www/SaintGillesCroixDeVie; chown aloa:www-data . -R&apos;
                 &apos;&apos;&apos;
             }
         }

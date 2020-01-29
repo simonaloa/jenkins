@@ -21,21 +21,16 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cd /var/lib/jenkins/HOME/Ugau_IonicAndroid; 
-git fetch origin refont &amp;&amp; git reset --hard origin/refont; 
-npm install
-#/usr/lib/android-sdk/tools/bin/sdkmanager --licenses
-cross-env ENV=&apos;prod&apos; ionic cordova build android --prod
-cp -r platforms/android/app/build/outputs/apk/debug/app-debug.apk .
-scp app-debug.apk  aloa@147.135.130.166:/var/www/ugau_production/admin/app-ugau.apk
+      <command>ssh root@147.135.130.166 &apos;cd /var/www/ugau_production/ionic_android/; git fetch origin refont &amp;&amp; git reset --hard origin/refont; npm install&apos;
+ssh root@147.135.130.166 &quot;export ANDROID_HOME=/home/aloa/Android/sdk; export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/aloa/Android/sdk/tools:/home/aloa/Android/sdk/platform-tools; cd /var/www/ugau_production/ionic_android/; cross-env ENV=&apos;prod&apos; ionic cordova build android --prod&quot;
+ssh root@147.135.130.166 &quot;cd /var/www/ugau_production/ionic_android/; cp platforms/android/app/build/outputs/apk/debug/app-debug.apk /var/www/ugau_production/admin/app-ugau.apk&quot;
+ssh root@147.135.130.166 &quot;cd /var/www/ugau_production/; chown aloa:www-data . -R&quot;
 
 echo &quot;From: jenkins@dev.aloa.ovh&quot; &gt; ./mail_auto;
 echo &quot;To: timothee@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
-echo &quot;Cc: contact@france-signalisations.fr&quot; &gt;&gt; ./mail_auto;
-echo &quot;Cc: olivier@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
-echo &quot;Subject: Generation de l&apos;APK pour l&apos;application UGAU&quot; &gt;&gt; ./mail_auto;
+echo &quot;Subject: Generation de l&apos;APK pour l&apos;application UGAU : PRODUCTION&quot; &gt;&gt; ./mail_auto;
 echo &quot;&quot; &gt;&gt; ./mail_auto;
-echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGUAU vient d&apos;être générée à l&apos;adresse http://production.ugau.fr/app-debug.apk\nAttention, il est possible que l&apos;application ne soit pas fonctionnelle après installation : Il faut effacer les données de l&apos;application dans les parametres android\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
+echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGAU pour PRODUCTION vient d&apos;être générée à l&apos;adresse https://production.ugau.fr/app-ugau.apk\nAttention, il est possible que l&apos;application ne soit pas fonctionnelle après installation : Il faut effacer les données de l&apos;application dans les parametres android\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
 cat ./mail_auto | /usr/sbin/sendmail -t;
 rm ./mail_auto</command>
     </hudson.tasks.Shell>
