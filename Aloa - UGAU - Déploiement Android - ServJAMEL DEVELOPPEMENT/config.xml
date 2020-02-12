@@ -28,6 +28,7 @@ ssh root@147.135.130.166 &quot;cd /var/www/ugau_developpement/; chown aloa:www-d
 
 echo &quot;From: jenkins@dev.aloa.ovh&quot; &gt; ./mail_auto;
 echo &quot;To: timothee@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
+echo &quot;Cc: contact@france-signalisations.fr&quot; &gt;&gt; ./mail_auto;
 echo &quot;Subject: Generation de l&apos;APK pour l&apos;application UGAU : DEVELOPPEMENT&quot; &gt;&gt; ./mail_auto;
 echo &quot;&quot; &gt;&gt; ./mail_auto;
 echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGAU pour DEVELOPPEMENT vient d&apos;être générée à l&apos;adresse https://developpement.ugau.fr/app-ugau.apk\nAttention, il est possible que l&apos;application ne soit pas fonctionnelle après installation : Il faut effacer les données de l&apos;application dans les parametres android\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
