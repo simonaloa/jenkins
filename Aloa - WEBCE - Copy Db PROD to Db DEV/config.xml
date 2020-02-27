@@ -11,14 +11,6 @@
       <gogsSecret>MjD)JYFuLixy%L12rGwruKvT</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
-    <jenkins.model.BuildDiscarderProperty>
-      <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>5</daysToKeep>
-        <numToKeep>5</numToKeep>
-        <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>-1</artifactNumToKeep>
-      </strategy>
-    </jenkins.model.BuildDiscarderProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
@@ -29,12 +21,12 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># Sauvegarde de la PROD
-ssh aloa@54.37.227.15 &apos;mysqldump -u root -pPalmier-10 tripapyrus&apos; &gt; export_tripapyrus_$(date +%Y-%m-%d_%H-%M)_PROD.sql
-# Sauvegarde de la DEV
-mysqldump -u root -pPalmier-10 tripapyrus &gt; export_tripapyrus_$(date +%Y-%m-%d_%H-%M)_DEV.sql
-# Import de PROD sur DEV
-mysql -u root -p&apos;Palmier-10&apos; tripapyrus &lt; export_tripapyrus_$(date +%Y-%m-%d_%H-%M)_PROD.sql</command>
+      <command># Sauvegarde de la base de PROD
+ssh aloa@54.37.227.15 &apos;mysqldump -u solution_ce -pPalmier-10 solution_ce_adapei&apos; &gt; export_webce_adapei_$(date +%Y-%m-%d_%H-%M)_PROD.sql
+# Sauvegarde de la base de DEV
+mysqldump -u root -pPalmier-10 solution_ce_adapei &gt; export_webce_adapei_$(date +%Y-%m-%d_%H-%M)_DEV.sql
+# Import de la base PROD dans DEV
+mysql -u root -p&apos;Palmier-10&apos; solution_ce_adapei &lt; export_webce_adapei_$(date +%Y-%m-%d_%H-%M)_PROD.sql</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
