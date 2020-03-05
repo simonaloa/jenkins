@@ -40,7 +40,7 @@ URL=&apos;http://glpi.hadvendee.com/&apos;
 TYPE=&apos;&apos;
 SERV=&apos;&apos;
 FAVICON=&apos;http://glpi.hadvendee.com/pics/login_logo_glpi.png&apos;
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

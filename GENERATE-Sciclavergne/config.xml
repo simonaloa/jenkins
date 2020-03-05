@@ -86,7 +86,7 @@ URL=&apos;http://sciclavergne.com/&apos;
 TYPE=&apos;wordpress&apos;
 SERV=&apos;OVH ALOA.INFO&apos;
 FAVICON=&apos;http://sciclavergne.com/wp-content/uploads/2019/01/Plan-verso-flyer-magasin-1024x658.jpg&apos;
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
 
 declare -u UPPER_LF=&quot;ScicLaVergne&quot;
 mkdir -p $HOME/HOME/_Rapports/$UPPER_LF

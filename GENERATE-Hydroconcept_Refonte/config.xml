@@ -85,7 +85,7 @@ URL=&apos;https://www.hydroconcept.eu/&apos;
 TYPE=&apos;wordpress&apos;
 SERV=&apos;OVH ALOA.OVH&apos;
 FAVICON=&apos;https://www.hydroconcept.eu/wp-content/themes/html5blank-stable/img/icons/favicon.ico&apos;
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
 
 declare -u UPPER_LF=&quot;Hydroconcept_Refonte&quot;
 mkdir -p $HOME/HOME/_Rapports/$UPPER_LF

@@ -85,7 +85,7 @@ URL=&apos;http://passerelles-asso.net/&apos;
 TYPE=&apos;wordpress&apos;
 SERV=&apos;OVH ALOA.OVH&apos;
 FAVICON=&apos;https://passerelles-asso.net/wp-content/uploads/2016/11/cropped-logosite-32x32.png&apos;
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
 
 declare -u UPPER_LF=&quot;Passerelles-Asso&quot;
 mkdir -p $HOME/HOME/_Rapports/$UPPER_LF

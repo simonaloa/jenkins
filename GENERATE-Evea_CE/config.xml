@@ -86,7 +86,7 @@ URL=&apos;http://evea.asso.fr/ce/&apos;
 TYPE=&apos;joomla&apos;
 SERV=&apos;OVH ALOA.INFO&apos;
 FAVICON=&apos;&apos;
-curl http://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
