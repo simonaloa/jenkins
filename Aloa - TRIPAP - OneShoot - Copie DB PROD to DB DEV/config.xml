@@ -30,11 +30,11 @@
   <builders>
     <hudson.tasks.Shell>
       <command># Sauvegarde de la PROD
-ssh aloa@54.37.227.15 &apos;mysqldump -u root -pPalmier-10 tripapyrus&apos; &gt; export_tripapyrus_$(date +%Y-%m-%d_%H-%M)_PROD.sql
+ssh aloa@54.37.227.15 &apos;mysqldump -u root -pPalmier-10 tripapyrus&apos; &gt; export_tripapyrus_PROD.sql
 # Sauvegarde de la DEV
-mysqldump -u root -pPalmier-10 tripapyrus &gt; export_tripapyrus_$(date +%Y-%m-%d_%H-%M)_DEV.sql
+mysqldump -u root -pPalmier-10 tripapyrus &gt; export_tripapyrus_DEV.sql
 # Import de PROD sur DEV
-mysql -u root -p&apos;Palmier-10&apos; tripapyrus &lt; export_tripapyrus_$(date +%Y-%m-%d_%H-%M)_PROD.sql</command>
+mysql -u root -p&apos;Palmier-10&apos; tripapyrus &lt; export_tripapyrus_PROD.sql</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
