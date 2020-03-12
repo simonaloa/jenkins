@@ -1,82 +1,77 @@
-<?xml version='1.1' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description>GENERATED JOB</description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.20.0">
-      <doNotScan>false</doNotScan>
-    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-  </properties>
-  <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>H 4 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.20.1">
-      <delegate>
-        <consolePrefix>SSH: </consolePrefix>
-        <delegate plugin="publish-over@0.22">
-          <publishers>
-            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.20.1">
-              <configName>ALOA.OVH</configName>
-              <verbose>false</verbose>
-              <transfers>
-                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
-                  <remoteDirectory></remoteDirectory>
-                  <sourceFiles></sourceFiles>
-                  <excludes></excludes>
-                  <removePrefix></removePrefix>
-                  <remoteDirectorySDF>false</remoteDirectorySDF>
-                  <flatten>false</flatten>
-                  <cleanRemote>false</cleanRemote>
-                  <noDefaultExcludes>false</noDefaultExcludes>
-                  <makeEmptyDirs>false</makeEmptyDirs>
-                  <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>cd decopeint85
+<?xml version="1.0" encoding="UTF-8"?><project>
+	<actions/>
+	<description>GENERATED JOB</description>
+	<keepDependencies>false</keepDependencies>
+	<properties/>
+	<scm class="hudson.scm.NullSCM"/>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H 4 * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.18">
+			<delegate>
+				<consolePrefix>SSH: </consolePrefix>
+				<delegate plugin="publish-over@0.21">
+					<publishers>
+						<jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.18">
+							<configName>ALOA.OVH</configName>
+							<verbose>false</verbose>
+							<transfers>
+								<jenkins.plugins.publish__over__ssh.BapSshTransfer>
+									<remoteDirectory/>
+									<sourceFiles/>
+									<excludes/>
+									<removePrefix/>
+									<remoteDirectorySDF>false</remoteDirectorySDF>
+									<flatten>false</flatten>
+									<cleanRemote>false</cleanRemote>
+									<noDefaultExcludes>false</noDefaultExcludes>
+									<makeEmptyDirs>false</makeEmptyDirs>
+									<patternSeparator>[, ]+</patternSeparator>
+									<execCommand>cd decopeint85
 										git add . -v 
-										git commit --author=&quot;Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
+										git commit --author="Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;" -m 'Sauvegarde journaliere' | true
 									</execCommand>
-                  <execTimeout>120000</execTimeout>
-                  <usePty>false</usePty>
-                  <useAgentForwarding>false</useAgentForwarding>
-                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
-              </transfers>
-              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-              <usePromotionTimestamp>false</usePromotionTimestamp>
-            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
-          </publishers>
-          <continueOnError>false</continueOnError>
-          <failOnError>false</failOnError>
-          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
-        </delegate>
-      </delegate>
-    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
+									<execTimeout>120000</execTimeout>
+									<usePty>false</usePty>
+									<useAgentForwarding>false</useAgentForwarding>
+								</jenkins.plugins.publish__over__ssh.BapSshTransfer>
+							</transfers>
+							<useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+							<usePromotionTimestamp>false</usePromotionTimestamp>
+						</jenkins.plugins.publish__over__ssh.BapSshPublisher>
+					</publishers>
+					<continueOnError>false</continueOnError>
+					<failOnError>false</failOnError>
+					<alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+					<hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+				</delegate>
+			</delegate>
+		</jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
 cd $HOME/HOME/DecoPeint85;
 git fetch site master
 git reset --hard site/master
 git push origin master -f
-WPNAME=&apos;DecoPeint85&apos;
-WPDBVERSION=&apos;&apos;
-WPPLUGIN=&apos;&apos;
-URL=&apos;http://www.decopeint85.fr/&apos;
-TYPE=&apos;none&apos;
-SERV=&apos;OVH ALOA.OVH&apos;
-FAVICON=&apos;http://www.decopeint85.fr/favicon.ico&apos;
-curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
+WPNAME='DecoPeint85'
+WPDBVERSION=''
+WPPLUGIN=''
+URL='http://www.decopeint85.fr/'
+TYPE='none'
+SERV='OVH ALOA.OVH'
+FAVICON='http://www.decopeint85.fr/favicon.ico'
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON"
 			</command>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers/>
-  <buildWrappers/>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers/>
+	<buildWrappers/>
 </project>
