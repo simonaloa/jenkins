@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
-	<actions/>
-	<description>GENERATED JOB</description>
-	<keepDependencies>false</keepDependencies>
-	<properties/>
-	<scm class="hudson.scm.NullSCM"/>
-	<canRoam>true</canRoam>
-	<disabled>false</disabled>
-	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-	<triggers>
-		<hudson.triggers.TimerTrigger>
-			<spec>H 4 * * *</spec>
-		</hudson.triggers.TimerTrigger>
-	</triggers>
-	<concurrentBuild>false</concurrentBuild>
-	<builders>
-		<hudson.tasks.Shell>
-			<command>#!/bin/bash
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>GENERATED JOB</description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 4 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
 cd $HOME/HOME/PlanchotBoutique;
 USER=aloa85
 PASS=Palmier-10
@@ -25,19 +30,19 @@ HOST=ftp.planchot.com
 wget -mnH --cut-dirs=3 ftp://$USER:$PASS@$HOST/public/www/boutique -X public/www/boutique/.git
 
 git add . -v
-git commit -m 'Sauvegarde journaliere' | true
+git commit -m &apos;Sauvegarde journaliere&apos; | true
 git push origin master -f | true
 
-WPNAME='Planchot_Boutique'
+WPNAME=&apos;Planchot_Boutique&apos;
 WPDBVERSION=``
 WPPLUGIN=``
-URL='http://www.planchot.com/boutique/Planchot-Chocolatier-Tresse-Doree'
-TYPE=''
-SERV=''
-FAVICON='http://www.planchot.com/boutique/img/favicon.ico?1565614537'
-curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON"</command>
-		</hudson.tasks.Shell>
-	</builders>
-	<publishers/>
-	<buildWrappers/>
+URL=&apos;http://www.planchot.com/boutique/Planchot-Chocolatier-Tresse-Doree&apos;
+TYPE=&apos;&apos;
+SERV=&apos;&apos;
+FAVICON=&apos;http://www.planchot.com/boutique/img/favicon.ico?1565614537&apos;
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
 </project>
