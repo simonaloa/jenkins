@@ -28,21 +28,21 @@ pipeline {
         stage(&quot;PREREQUIS&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_fr/ionic_admin; git fetch origin master &amp;&amp; git reset --hard origin/master; npm install&apos;
+                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_fr/ionic_admin; git fetch origin master &amp;&amp; git reset --hard origin/master; npm install&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;BUILD&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_fr/ionic_admin; /usr/bin/cross-env ENV=&apos;dev&apos; ionic cordova build browser --prod&apos;
+                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_fr/ionic_admin; /usr/bin/cross-env ENV=&apos;dev&apos; ionic cordova build browser --prod&apos;
                 &apos;&apos;&apos;
             }
         }
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_fr/ionic_admin; cp -r platforms/browser/www/* /var/www/ugau_fr/admin/&apos;
+                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_fr/ionic_admin; cp -r platforms/browser/www/* /var/www/ugau_fr/admin/&apos;
                 &apos;&apos;&apos;
             }
         }

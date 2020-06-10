@@ -28,7 +28,7 @@ pipeline {
         stage(&quot;PREREQUIS&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; git fetch origin master &amp;&amp; git reset --hard origin/master; npm install&apos;
+                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; git fetch origin master &amp;&amp; git reset --hard origin/master; npm install&apos;
                 &apos;&apos;&apos;
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; cp -r platforms/browser/www/* /var/www/ugau_developpement/admin/&apos;
+                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin; cp -r platforms/browser/www/* /var/www/ugau_developpement/admin/&apos;
                 &apos;&apos;&apos;
             }
         }
