@@ -1,0 +1,42 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
+      <gogsSecret>timotheebarreteau@gmail.com</gogsSecret>
+      <gogsUsePayload>false</gogsUsePayload>
+    </org.jenkinsci.plugins.gogs.GogsProjectProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>ssh root@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_android/; git fetch origin refont &amp;&amp; git reset --hard origin/refont; npm install&apos;
+ssh root@147.135.130.166 &quot;cd /var/www/ugau_developpement/ionic_android/; sed -i -e &apos;s/UGAU/UGAU SAINTREVEREND/&apos; -e &apos;s/com.aloa.ugau/com.aloa.ugausaintreverend/&apos; config.xml&quot;
+ssh root@147.135.130.166 &quot;export ANDROID_HOME=/home/aloa/Android/sdk; export PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/aloa/Android/sdk/tools:/home/aloa/Android/sdk/platform-tools; cd /var/www/ugau_developpement/ionic_android/; cross-env ENV=&apos;dev&apos; ionic cordova build android --prod&quot;
+ssh root@147.135.130.166 &quot;cd /var/www/ugau_developpement/ionic_android/; cp platforms/android/app/build/outputs/apk/debug/app-debug.apk /var/www/ugau_developpement/admin/android/app-ugau-saintreverend.apk&quot;
+ssh root@147.135.130.166 &quot;cd /var/www/ugau_developpement/; chown aloa:www-data . -R&quot;
+
+echo &quot;From: jenkins@dev.aloa.ovh&quot; &gt; ./mail_auto;
+echo &quot;To: timothee@aloa-informatique.com&quot; &gt;&gt; ./mail_auto;
+echo &quot;Cc: contact@france-signalisations.fr&quot; &gt;&gt; ./mail_auto;
+echo &quot;Subject: Generation de l&apos;APK pour l&apos;application UGAU : DEVELOPPEMENT - SAINTREVEREND&quot; &gt;&gt; ./mail_auto;
+echo &quot;&quot; &gt;&gt; ./mail_auto;
+echo &quot;Bonjour,\n\nUne nouvelle version de l&apos;application UGAU pour DEVELOPPEMENT - SAINTREVEREND vient d&apos;être générée à l&apos;adresse https://developpement.ugau.fr/android/app-ugau-saintreverend.apk\nAttention, il est possible que l&apos;application ne soit pas fonctionnelle après installation : Il faut effacer les données de l&apos;application dans les parametres android\n\nCordialement,\n\nPs: Ne pas répondre sur cette adresse email.&quot; &gt;&gt; ./mail_auto;
+cat ./mail_auto | /usr/sbin/sendmail -t;
+rm ./mail_auto</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
