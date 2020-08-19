@@ -27,7 +27,10 @@
     <hudson.tasks.Shell>
       <command>cd /var/lib/jenkins/HOME/_DB_Saves
 mysql -u root -p&quot;Palmier-10&quot; -N -e &apos;show databases&apos; | while read dbname; do mysqldump -u root -p&quot;Palmier-10&quot; --complete-insert --routines --triggers --single-transaction &quot;$dbname&quot; &gt; NS36_&quot;$dbname&quot;_$(date +%Y-%m-%d).sql; done
-rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/</command>
+find . -ctime +14 -exec rm {} \;
+rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/
+
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>

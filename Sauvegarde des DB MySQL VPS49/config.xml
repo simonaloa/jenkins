@@ -29,9 +29,12 @@
 ssh root@vps490005.ovh.net &lt;&lt;EOF
 mysql -u root -p&quot;Palmier-10&quot; -N -e &apos;show databases&apos; | while read dbname; do mysqldump -u root -p&quot;Palmier-10&quot; --complete-insert --routines --triggers --single-transaction &quot;\$dbname&quot; &gt; VPS49_&quot;\$dbname&quot;_\$(date +%Y-%m-%d).sql; done
 EOF
+
 scp root@vps490005.ovh.net:/root/VPS49* .
 ssh root@vps490005.ovh.net &apos;rm VPS49*&apos;
-</command>
+
+cd /var/lib/jenkins/HOME/_DB_Saves
+find . -ctime +14 -exec rm {} \;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
