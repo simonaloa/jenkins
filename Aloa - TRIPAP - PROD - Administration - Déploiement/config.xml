@@ -39,7 +39,7 @@ timestamps {
     	stage (&apos;Aloa - TRIPAP - Déploiement TripapyrusPlanning - Build&apos;) {
             sh &quot;&quot;&quot; 
             cd /var/lib/jenkins/HOME/Tripapyrus_planning
-            git fetch origin benne &amp;&amp; git reset --hard origin/benne
+            git fetch origin master &amp;&amp; git reset --hard origin/master
             npm install 
             sed -i -e &apos;9s/unknown/any/&apos; node_modules/@ionic-native/core/decorators/common.d.ts
             cross-env ENV=&apos;prod&apos; ionic cordova build browser
