@@ -25,7 +25,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ssh -p 2222 dev@crp.aloa-informatique.com &quot;cd /var/www/html/CrpClient/CrpApi; mysqldump -u crp_api -pPalmier-10 crp_api &gt; sauvegarde_crp_$BUILD_NUMBER.sql&quot;</command>
+      <command>ssh -p 2222 dev@client.crp.fr &quot;cd /var/www/html/CrpClient/CrpApi; mysqldump -u crp_api -pPalmier-10 crp_api &gt; sauvegarde_crp_$BUILD_NUMBER.sql&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
