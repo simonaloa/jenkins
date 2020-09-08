@@ -25,7 +25,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>nc -zvw3 aloainformatique.com 3388
+      <command>nc -zvw3 aloaintra.dyndns.org 3388
 </command>
     </hudson.tasks.Shell>
   </builders>
