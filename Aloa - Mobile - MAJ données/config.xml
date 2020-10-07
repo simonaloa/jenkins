@@ -51,9 +51,11 @@ pipeline {
                     else
                         echo &quot;Le fichier n&apos;est plus en cours de transfert&quot;
                         sudo scp -i /var/lib/jenkins/.ssh/id_rsa aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/A-SuiviTéléphone.csv . 
-                        sudo scp -i /var/lib/jenkins/.ssh/id_rsa aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/A-Intervenants.csv . 
+                        sudo scp -i /var/lib/jenkins/.ssh/id_rsa aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/A-Intervenants.csv .  
+                        sudo scp -i /var/lib/jenkins/.ssh/id_rsa aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/A-Clients.csv . 
                         sudo chown aloa:aloa A-SuiviTéléphone.csv
                         sudo chown aloa:aloa A-Intervenants.csv
+                        sudo chown aloa:aloa A-Clients.csv
                 fi
                 &apos;&apos;&apos;
             }
