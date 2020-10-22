@@ -55,6 +55,8 @@ sh test_planchot.sh
 echo &quot;&quot;
 sh test_unc85.sh
 echo &quot;&quot;
+sh test_saveursetnature.sh
+echo &quot;&quot;
 echo &quot;&quot;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
