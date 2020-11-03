@@ -1,27 +1,22 @@
-<?xml version='1.1' encoding='UTF-8'?>
-<project>
-  <actions/>
-  <description>GENERATED JOB</description>
-  <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
-      <doNotScan>false</doNotScan>
-    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-  </properties>
-  <scm class="hudson.scm.NullSCM"/>
-  <canRoam>true</canRoam>
-  <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
-  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers>
-    <hudson.triggers.TimerTrigger>
-      <spec>H 4 * * *</spec>
-    </hudson.triggers.TimerTrigger>
-  </triggers>
-  <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>#!/bin/bash
+<?xml version="1.0" encoding="UTF-8"?><project>
+	<actions/>
+	<description>GENERATED JOB</description>
+	<keepDependencies>false</keepDependencies>
+	<properties/>
+	<scm class="hudson.scm.NullSCM"/>
+	<canRoam>true</canRoam>
+	<disabled>false</disabled>
+	<blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+	<blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+	<triggers>
+		<hudson.triggers.TimerTrigger>
+			<spec>H 4 * * *</spec>
+		</hudson.triggers.TimerTrigger>
+	</triggers>
+	<concurrentBuild>false</concurrentBuild>
+	<builders>
+		<hudson.tasks.Shell>
+			<command>#!/bin/bash
 cd $HOME/HOME/LaBruffiereFootball;
 USER=mercatof
 PASS=IC48Hws85530
@@ -30,26 +25,25 @@ HOST=ftp.cluster003.hosting.ovh.net
 wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
 
 git add . -v
-git commit -m &apos;Sauvegarde journaliere&apos; | true
+git commit -m 'Sauvegarde journaliere' | true
 git push origin master -f | true
 
-WPNAME=&apos;LaBruffiereFootball&apos;
-WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
-WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
-URL=&apos;http://labruffierefootball.com/&apos;
-TYPE=&apos;wordpress&apos;
-SERV=&apos;&apos;
-FAVICON=&apos;https://www.labruffierefootball.com/wp-content/uploads/2017/10/cropped-icone-2017-32x32.jpg&apos;
-curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
+WPNAME='LaBruffiereFootball'
+WPDBVERSION=`cat wp-includes/version.php | grep "wp_version =" | cut -d \' -f 2`
+WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d '/'`
+URL='http://labruffierefootball.com/'
+TYPE='wordpress'
+SERV=''
+FAVICON='https://www.labruffierefootball.com/wp-content/uploads/2017/10/cropped-icone-2017-32x32.jpg'
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d "type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON"
 
-declare -u UPPER_LF=&quot;LaBruffiereFootball&quot;
+declare -u UPPER_LF="LaBruffiereFootball"
 mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
 ~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
 ~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
 			</command>
-      <configuredLocalRules/>
-    </hudson.tasks.Shell>
-  </builders>
-  <publishers/>
-  <buildWrappers/>
+		</hudson.tasks.Shell>
+	</builders>
+	<publishers/>
+	<buildWrappers/>
 </project>
