@@ -28,7 +28,7 @@ pipeline {
         stage(&quot;PREREQUIS&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
-                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin_refonte; . ~/.nvm/nvm.sh; git fetch origin master &amp;&amp; git reset --hard origin/master; npm install&apos;
+                ssh aloa@147.135.130.166 &apos;cd /var/www/ugau_developpement/ionic_admin_refonte; . ~/.nvm/nvm.sh; git fetch origin develop &amp;&amp; git reset --hard origin/develop; npm install&apos;
                 &apos;&apos;&apos;
             }
         }
