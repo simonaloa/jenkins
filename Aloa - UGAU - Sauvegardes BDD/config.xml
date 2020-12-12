@@ -25,7 +25,9 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>ssh root@147.135.130.166 &apos;cd /var/www/dashboard/SauvegardesBdd; bash script.sh&apos;</command>
+      <command>ssh root@147.135.130.166 &apos;cd /var/www/dashboard/SauvegardesBdd; bash script.sh&apos;
+cd /var/lib/jenkins/HOME/SauvegardesUGAU; scp -r root@147.135.130.166:/var/www/dashboard/SauvegardesBdd/ .</command>
+      <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
