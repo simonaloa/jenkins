@@ -41,11 +41,11 @@
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
                   <execCommand>cd www
-										WPDBNAME=`cat configuration.php | grep &apos;$db &apos; | cut -d \&apos; -f 2`
-										WPDBUSER=`cat configuration.php | grep &apos;$$user &apos; | cut -d \&apos; -f 2`
-										WPDBPASS=`cat configuration.php | grep &apos;$password &apos; | cut -d \&apos; -f 2`
-										WPDBHOST=`cat configuration.php | grep &apos;$host &apos; | cut -d \&apos; -f 2 | cut -d : -f 1`
-										WPDBPORT=`cat configuration.php | grep &apos;$host &apos; | cut -d \&apos; -f 2 | cut -d : -f 2`
+										WPDBNAME=`cat wp-config.php | grep &apos;DB_NAME&apos; | cut -d \&apos; -f 4`
+										WPDBUSER=`cat wp-config.php | grep &apos;DB_USER&apos; | cut -d \&apos; -f 4`
+										WPDBPASS=`cat wp-config.php | grep &apos;DB_PASSWORD&apos; | cut -d \&apos; -f 4`
+										WPDBHOST=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 1`
+										WPDBPORT=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 2`
 										if [ &quot;$WPDBPORT&quot; == &quot;$WPDBHOST&quot; ]; then
 										echo &quot;Port non prÃ©sent pour le mysqldump&quot;
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME &gt; export_database.sql
@@ -74,19 +74,24 @@
     </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
     <hudson.tasks.Shell>
       <command>#!/bin/bash
-cd $HOME/HOME/MenageService85;
+cd $HOME/HOME/MenageService85_WP;
 git fetch site master
 git reset --hard site/master
 git push origin master -f
-
 WPNAME=&apos;MenageService85&apos;
-WPDBVERSION=`cat language/en-GB/en-GB.xml | grep &quot;&lt;version&gt;&quot; | cut -d &apos;&gt;&apos; -f 2 | cut -d &apos;&lt;&apos; -f 1`
-WPPLUGIN=&apos;&apos;
+WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
+WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
 URL=&apos;https://www.menage-service-85.fr/&apos;
-TYPE=&apos;joomla&apos;
+TYPE=&apos;wordpress&apos;
 SERV=&apos;OVH MENAGESERVICE&apos;
-FAVICON=&apos;https://www.menage-service-85.fr/templates/aspi-menage-service/favicon.ico&apos;
-curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
+FAVICON=&apos;https://menage-service-85.fr/wp-content/uploads/2020/12/MENAGESERVICE_logo-blanc.png&apos;
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
+
+declare -u UPPER_LF=&quot;MenageService85_WP&quot;
+mkdir -p $HOME/HOME/_Rapports/$UPPER_LF
+~/.timotheeBin/phploc wp-content/themes &gt; $HOME/HOME/_Rapports/$UPPER_LF/rapport_phploc.txt
+~/.timotheeBin/phpmetrics wp-content/themes --report-html=$HOME/HOME/_Rapports/$UPPER_LF/rapport_phpmetrics
+			</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
