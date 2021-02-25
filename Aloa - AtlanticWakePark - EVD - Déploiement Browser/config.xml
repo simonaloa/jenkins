@@ -42,6 +42,7 @@ pipeline {
         stage(&quot;COPY&quot;) {
             steps {
                 sh &apos;&apos;&apos;#!/bin/bash
+                sudo rm -rf /var/www/html/AtlanticWakePark/admin/*
                 cd ~/HOME/AtlanticWakePark; sudo cp -r platforms/browser/www/* /var/www/html/AtlanticWakePark/admin/
                 &apos;&apos;&apos;
             }
