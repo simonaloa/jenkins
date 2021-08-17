@@ -1,0 +1,49 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
+      <gogsSecret>{AQAAABAAAAAQRjxjIzfrY/YyZcJ0xOo5GMXHKLAd+HfBaJunKJr7/KY=}</gogsSecret>
+      <gogsUsePayload>false</gogsUsePayload>
+      <gogsBranchFilter></gogsBranchFilter>
+    </org.jenkinsci.plugins.gogs.GogsProjectProperty>
+  </properties>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 2 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command># SAUVEGARDE DE LA BASE DE DONEES AtlanticWakePark (Application)
+ssh aloa@vps490005.ovh.net &apos;mysqldump -u root -p&quot;Palmier-10&quot; atlanticwakepark &gt; /var/www/database_saves/ATLANTICWAKEPARK/export_database_$(date +%Y-%m-%d).sql&apos;
+cd /var/lib/jenkins/HOME/AtlanticWakePark_SaveDB
+# Récupération de la sauvegarde de la base de données de ATLANTICWAKEPARK
+scp -r aloa@vps490005.ovh.net:/var/www/database_saves/ATLANTICWAKEPARK/export_database_$(date +%Y-%m-%d).sql /var/lib/jenkins/HOME/AtlanticWakePark_SaveDB
+# Copie de la sauvegarde de la base de données de ATLANTICWAKEPARK chez o2switch
+scp -r  /var/lib/jenkins/HOME/AtlanticWakePark_SaveDB/export_database_$(date +%Y-%m-%d).sql myno9622@chirashi.o2switch.net:/home/myno9622/awp.api.aloa85.com/DB_Saves/
+# IMPORT DE LA BASE DE DONEES AtlanticWakePark
+ssh myno9622@chirashi.o2switch.net &apos;mysql -u myno9622 -p&quot;qyBICBnwSu&quot;\!&quot;M&quot; myno9622_awp &lt; /home/myno9622/awp.api.aloa85.com/DB_Saves/export_database_$(date +%Y-%m-%d).sql&apos;
+# Il faut faire de la place sur le VPS
+ssh aloa@vps490005.ovh.net &apos;rm /var/www/database_saves/ATLANTICWAKEPARK/*&apos;
+
+# On conserve que les 15 derniers jours
+cd /var/lib/jenkins/HOME/AtlanticWakePark_SaveDB
+find . -ctime +14 -exec rm {} \;</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>
