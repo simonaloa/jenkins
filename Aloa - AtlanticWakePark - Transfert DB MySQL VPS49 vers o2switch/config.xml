@@ -40,7 +40,9 @@ ssh aloa@vps490005.ovh.net &apos;rm /var/www/database_saves/ATLANTICWAKEPARK/*&a
 
 # On conserve que les 15 derniers jours
 cd /var/lib/jenkins/HOME/AtlanticWakePark_SaveDB
-find . -ctime +14 -exec rm {} \;</command>
+find . -ctime +14 -exec rm {} \;
+#Chez o2switch aussi
+ssh myno9622@chirashi.o2switch.net  &apos;find /home/myno9622/awp.api.aloa85.com/DB_Saves -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
