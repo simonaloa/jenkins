@@ -1,8 +1,8 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <flow-definition plugin="workflow-job@2.40">
   <actions>
-    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.3.2"/>
-    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.3.2">
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.8.4"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.8.4">
       <jobProperties/>
       <triggers/>
       <parameters/>
@@ -12,20 +12,13 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-      <triggers>
-        <hudson.triggers.TimerTrigger>
-          <spec>H 8 * * 1-5
-H 14 * * 1-5</spec>
-        </hudson.triggers.TimerTrigger>
-      </triggers>
-    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
       <gogsSecret>{AQAAABAAAAAQ+ZMdlRlZ/mO+iM6VpYH9GQRI4XNlMBaI69DxipjrU7k=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
+      <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
@@ -35,8 +28,16 @@ H 14 * * 1-5</spec>
         <artifactNumToKeep>-1</artifactNumToKeep>
       </strategy>
     </jenkins.model.BuildDiscarderProperty>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <hudson.triggers.TimerTrigger>
+          <spec>H 8 * * 1-5
+H 14 * * 1-5</spec>
+        </hudson.triggers.TimerTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
   </properties>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.60">
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.90">
     <script>#!/usr/bin/env groovy
 pipeline {
     agent any
@@ -47,7 +48,7 @@ pipeline {
                 cd /var/www/html/AloaMobile/aloaMobile; 
                 php bin/console app:doAlertEmail 50 -v; # Timothée
                 php bin/console app:doAlertEmail 35 -v; # Jonathan
-                php bin/console app:doAlertEmail 14 -v; # Yohann
+      #          php bin/console app:doAlertEmail 14 -v; # Yohann
                 php bin/console app:doAlertEmail 23 -v; # Jimmy
                 &apos;&apos;&apos;
             }
