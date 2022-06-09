@@ -4,12 +4,13 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret></gogsSecret>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
+      <gogsSecret>{AQAAABAAAAAQJSJTVglTQ8C0Ts4j1Dzk0H8w/jYsF2dbliSunEvasQ8=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
+      <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
@@ -28,9 +29,10 @@
       <command>cd /var/lib/jenkins/HOME/_DB_Saves
 mysql -u root -p&quot;Palmier-10&quot; -N -e &apos;show databases&apos; | while read dbname; do mysqldump -u root -p&quot;Palmier-10&quot; --complete-insert --routines --triggers --single-transaction &quot;$dbname&quot; &gt; NS36_&quot;$dbname&quot;_$(date +%Y-%m-%d).sql; done
 find . -ctime +14 -exec rm {} \;
-rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/
-
+# rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/
+rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ zwgipbh@ftp.cluster020.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/
 </command>
+      <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
