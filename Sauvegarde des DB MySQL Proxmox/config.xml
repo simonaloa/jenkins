@@ -30,7 +30,7 @@
 mysql -u root -p&quot;Palmier-10&quot; -N -e &apos;show databases&apos; | while read dbname; do mysqldump -u root -p&quot;Palmier-10&quot; --complete-insert --routines --triggers --single-transaction &quot;$dbname&quot; &gt; NS36_&quot;$dbname&quot;_$(date +%Y-%m-%d).sql; done
 find . -ctime +14 -exec rm {} \;
 # rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ aloaovhjok@ftp.cluster023.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/
-rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ zwgipbh@ftp.cluster020.hosting.ovh.net:/homez.105/aloaovhjok/Sauvegarde/databases/
+rsync -avz /var/lib/jenkins/HOME/_DB_Saves/ zwgipbh@ftp.cluster020.hosting.ovh.net:/home/zwgipbh/Sauvegarde/databases/
 </command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
