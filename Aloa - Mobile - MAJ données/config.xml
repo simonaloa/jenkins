@@ -78,5 +78,5 @@ sudo scp -i /var/lib/jenkins/.ssh/id_rsa aloaovhjok@ftp.cluster023.hosting.ovh.n
     <sandbox>false</sandbox>
   </definition>
   <triggers/>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
 </flow-definition>
