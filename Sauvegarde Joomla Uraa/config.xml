@@ -34,8 +34,10 @@ cd /var/lib/jenkins/HOME/
 scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:uraa_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
 scp -r /var/lib/jenkins/HOME/uraa_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/uraa/
+#On efface le zip sur aloa.ovh
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r uraa_$(date +%Y-%m-%d).zip&apos;
 # On conserve que les 15 derniers jours
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find /Sauvegarde/uraa/ -ctime +14 -exec rm {} \;&apos;</command>
+ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/uraa/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>

@@ -18,47 +18,28 @@
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers/>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H 2 * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin plugin="publish-over-ssh@1.22">
-      <delegate>
-        <consolePrefix>SSH: </consolePrefix>
-        <delegate plugin="publish-over@0.22">
-          <publishers>
-            <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.22">
-              <configName>MCUSINAGES</configName>
-              <verbose>true</verbose>
-              <transfers>
-                <jenkins.plugins.publish__over__ssh.BapSshTransfer>
-                  <remoteDirectory></remoteDirectory>
-                  <sourceFiles></sourceFiles>
-                  <excludes></excludes>
-                  <removePrefix></removePrefix>
-                  <remoteDirectorySDF>false</remoteDirectorySDF>
-                  <flatten>false</flatten>
-                  <cleanRemote>false</cleanRemote>
-                  <noDefaultExcludes>false</noDefaultExcludes>
-                  <makeEmptyDirs>false</makeEmptyDirs>
-                  <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>sudo zip -r mcusinages.zip /home/mcusinag/*</execCommand>
-                  <execTimeout>120000</execTimeout>
-                  <usePty>false</usePty>
-                  <useAgentForwarding>false</useAgentForwarding>
-                  <useSftpForExec>false</useSftpForExec>
-                </jenkins.plugins.publish__over__ssh.BapSshTransfer>
-              </transfers>
-              <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
-              <usePromotionTimestamp>false</usePromotionTimestamp>
-            </jenkins.plugins.publish__over__ssh.BapSshPublisher>
-          </publishers>
-          <continueOnError>false</continueOnError>
-          <failOnError>false</failOnError>
-          <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
-          <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
-        </delegate>
-      </delegate>
-    </jenkins.plugins.publish__over__ssh.BapSshBuilderPlugin>
+    <hudson.tasks.Shell>
+      <command>#Connexion à aloa.ovh
+ssh mcusinag@ssh.cluster006.hosting.ovh.net &apos;zip -r mcusinages_$(date +%Y-%m-%d).zip home/mcusinag&apos;
+#On se met à la racine de Jenkins
+cd /var/lib/jenkins/HOME/
+#On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
+scp -r mcusinag@ssh.cluster006.hosting.ovh.net:mcusinages_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+#On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
+scp -r /var/lib/jenkins/HOME/mcusinages_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/mc_usinages/
+#On efface le zip sur aloa.ovh
+ssh mcusinag@ssh.cluster006.hosting.ovh.net  &apos;rm -r mcusinages_$(date +%Y-%m-%d).zip&apos;
+# On conserve que les 15 derniers jours
+ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/mc_usinages/ -ctime +14 -exec rm {} \;&apos;</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers/>
