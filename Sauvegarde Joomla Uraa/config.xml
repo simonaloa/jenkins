@@ -1,14 +1,14 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Tache automatisée pour sauvegarder les fichiers du site : http://www.aidvy.com/</description>
+  <description>Tache automatisée pour sauvegarder les fichiers du site :https://uraa.fr/</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
-      <gogsSecret>{AQAAABAAAAAQLb3thGBQL4AWtrKwaKQoraOKXOzSDKFMzOMCwJeP/sg=}</gogsSecret>
+      <gogsSecret>{AQAAABAAAAAQhJJMujwQPrGMIbDwNAeuqBR1TjhEXhis4pYbWWyBxQU=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
       <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
@@ -27,15 +27,15 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#Connexion à aloa.ovh
-ssh aidvycompe@ftp.cluster005.hosting.ovh.net &apos;zip -r aidvy_$(date +%Y-%m-%d).zip /&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r uraa_$(date +%Y-%m-%d).zip www/uraa/&apos;
 #On se met à la racine de Jenkins
 cd /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
-scp -r  aidvycompe@ftp.cluster005.hosting.ovh.net:aidvy_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:uraa_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
-scp -r /var/lib/jenkins/HOME/aidvy_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/aidvy/
+scp -r /var/lib/jenkins/HOME/uraa_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/uraa/
 # On conserve que les 15 derniers jours
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find /Sauvegarde/PortLaVie/ -ctime +14 -exec rm {} \;&apos;</command>
+ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find /Sauvegarde/uraa/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
@@ -51,7 +51,7 @@ ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find /Sauvegarde/PortLaVie/ -c
       <regexp></regexp>
     </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
     <hudson.tasks.Mailer plugin="mailer@1.33">
-      <recipients>wordpress@aloa-informatique.com</recipients>
+      <recipients>wordpress@aloa-infomatique.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>

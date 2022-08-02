@@ -1,14 +1,14 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>Tache automatisée pour sauvegarder les fichiers du site : http://www.aidvy.com/</description>
+  <description>Tache automatisée pour sauvegarder les fichiers du site : https://www.scy85.fr/</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
-      <gogsSecret>{AQAAABAAAAAQLb3thGBQL4AWtrKwaKQoraOKXOzSDKFMzOMCwJeP/sg=}</gogsSecret>
+      <gogsSecret>{AQAAABAAAAAQRF4GMZ6u4zIZFC2dgP/Z37VID7YE8clu66QvoLFpi0g=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
       <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
@@ -27,15 +27,15 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#Connexion à aloa.ovh
-ssh aidvycompe@ftp.cluster005.hosting.ovh.net &apos;zip -r aidvy_$(date +%Y-%m-%d).zip /&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r scy85_$(date +%Y-%m-%d).zip Scy85&apos;
 #On se met à la racine de Jenkins
 cd /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
-scp -r  aidvycompe@ftp.cluster005.hosting.ovh.net:aidvy_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:scy85_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
-scp -r /var/lib/jenkins/HOME/aidvy_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/aidvy/
+scp -r /var/lib/jenkins/HOME/scy85_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/scy85/
 # On conserve que les 15 derniers jours
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find /Sauvegarde/PortLaVie/ -ctime +14 -exec rm {} \;&apos;</command>
+ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find /Sauvegarde/scy85/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
