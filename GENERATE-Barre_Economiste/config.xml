@@ -20,7 +20,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>H 4 * * *</spec>
+      <spec>24 21 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -31,7 +31,7 @@
         <delegate plugin="publish-over@0.22">
           <publishers>
             <jenkins.plugins.publish__over__ssh.BapSshPublisher plugin="publish-over-ssh@1.22">
-              <configName>ALOA.OVH</configName>
+              <configName>ALOA.C20</configName>
               <verbose>false</verbose>
               <transfers>
                 <jenkins.plugins.publish__over__ssh.BapSshTransfer>
@@ -52,10 +52,10 @@
 										WPDBHOST=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 1`
 										WPDBPORT=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 2`
 										if [ &quot;$WPDBPORT&quot; == &quot;$WPDBHOST&quot; ]; then
-										echo &quot;Port non prÃ©sent pour le mysqldump&quot;
+										echo &quot;Port non present pour le mysqldump&quot;
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME &gt; export_database.sql
 										else
-										echo &quot;Port prÃ©sent pour le mysqldump&quot;
+										echo &quot;Port present pour le mysqldump&quot;
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME -P $WPDBPORT &gt; export_database.sql
 										fi
 										git add . -v 
@@ -89,7 +89,7 @@ WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -
 WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
 URL=&apos;http://barre-economiste.fr/&apos;
 TYPE=&apos;wordpress&apos;
-SERV=&apos;OVH ALOA.OVH&apos;
+SERV=&apos;OVH ALOA.C20&apos;
 FAVICON=&apos;http://barre-economiste.fr/wp-content/themes/templateBarre/images/barre-economiste-logo.svg&apos;
 curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
 			</command>
