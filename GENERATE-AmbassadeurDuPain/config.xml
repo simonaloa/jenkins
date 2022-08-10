@@ -52,14 +52,14 @@
 										WPDBHOST=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 1`
 										WPDBPORT=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 2`
 										if [ &quot;$WPDBPORT&quot; == &quot;$WPDBHOST&quot; ]; then
-										echo &quot;Port non prÃ©sent pour le mysqldump&quot;
+										echo &quot;Port non present pour le mysqldump&quot;
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME &gt; export_database.sql
 										else
-										echo &quot;Port prÃ©sent pour le mysqldump&quot;
+										echo &quot;Port present pour le mysqldump&quot;
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME -P $WPDBPORT &gt; export_database.sql
 										fi
 										git add . -v 
-										git commit --author=&quot;Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
+										git commit --author=&quot;Aloa-Informatique Via Jenkins &lt;digital@aloa-informatique.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
 									</execCommand>
                   <execTimeout>2000000</execTimeout>
                   <usePty>false</usePty>
