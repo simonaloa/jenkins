@@ -10,6 +10,7 @@
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
       <gogsSecret>{AQAAABAAAAAQd9Gz/PMvwTD20T9Wm7F58TXDT31jdJ59AmipKZbMPVs=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
+      <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
@@ -19,7 +20,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>H 8 * * * </spec>
+      <spec>6 20 * * * </spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>

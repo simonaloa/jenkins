@@ -26,8 +26,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sudo cp -r ~/HOME/_Rapports/* /var/www/html/AloaMonitoring/RapportsMonitoring/Rapports/
-# scp -r ~/HOME/_Rapports/* root@37.59.50.178:/var/www/dev.timotheebarreteau.fr/Rapports/</command>
+      <command>sudo cp -r ~/HOME/_Rapports/* /var/www/html/AloaMonitoring/RapportsMonitoring/Rapports/</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
