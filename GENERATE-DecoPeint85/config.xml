@@ -47,7 +47,7 @@
                   <patternSeparator>[, ]+</patternSeparator>
                   <execCommand>cd decopeint85
 										git add . -v 
-										git commit --author=&quot;Timothee Via Jenkins &lt;timotheebarreteau@gmail.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
+										git commit --author=&quot;Simon Via Jenkins &lt;simon@aloa-informatique.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
 									</execCommand>
                   <execTimeout>120000</execTimeout>
                   <usePty>false</usePty>
