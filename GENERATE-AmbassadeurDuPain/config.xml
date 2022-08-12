@@ -59,7 +59,7 @@
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME -P $WPDBPORT &gt; export_database.sql
 										fi
 										git add . -v 
-										git commit --author=&quot;Aloa-Informatique Via Jenkins &lt;digital@aloa-informatique.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
+										git commit --author=&quot;Simon Via Jenkins &lt;simon@aloa-informatique.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
 									</execCommand>
                   <execTimeout>2000000</execTimeout>
                   <usePty>false</usePty>

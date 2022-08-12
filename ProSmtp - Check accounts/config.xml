@@ -64,7 +64,7 @@ echo &quot;&quot;</command>
   </builders>
   <publishers>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.82">
-      <recipientList>timothee@aloa-informatique.com, mathilde@aloa-informatique.com</recipientList>
+      <recipientList>digital@aloa-informatique.com, mathilde@aloa-informatique.com</recipientList>
       <configuredTriggers>
         <hudson.plugins.emailext.plugins.trigger.AlwaysTrigger>
           <email>

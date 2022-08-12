@@ -29,7 +29,7 @@
       <command>#!/bin/bash
 cd $HOME/HOME/Unc85_Refonte;
 USER=uncwgeep
-PASS=mCtvuFqz
+PASS=mCtvuFqz3
 HOST=ftp.cluster015.ovh.net				
 
 wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
