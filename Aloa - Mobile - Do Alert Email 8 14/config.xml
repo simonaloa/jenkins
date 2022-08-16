@@ -58,5 +58,5 @@ pipeline {
     <sandbox>true</sandbox>
   </definition>
   <triggers/>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
 </flow-definition>
