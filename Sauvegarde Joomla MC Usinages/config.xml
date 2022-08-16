@@ -26,18 +26,26 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#Connexion à aloa.ovh
-ssh mcusinag@ssh.cluster006.hosting.ovh.net &apos;zip -r mcusinages_$(date +%Y-%m-%d).zip www/&apos;
-#On se met à la racine de Jenkins
-cd /var/lib/jenkins/HOME/
-#On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
-scp -r mcusinag@ssh.cluster006.hosting.ovh.net:mcusinages_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
-#On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
-scp -r /var/lib/jenkins/HOME/mcusinages_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/mc_usinages/
-#On efface le zip sur aloa.ovh
-ssh mcusinag@ssh.cluster006.hosting.ovh.net  &apos;rm -r mcusinages_$(date +%Y-%m-%d).zip&apos;
-# On conserve que les 15 derniers jours
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/mc_usinages/ -ctime +14 -exec rm {} \;&apos;</command>
+      <command>#!/bin/bash
+cd $HOME/HOME/MCUsinages;
+USER=mcusinag
+PASS=i5UWfcSzAZko2svBXPid
+HOST=ftp.cluster006.hosting.ovh.net				
+
+wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
+
+git add . -v
+git commit -m &apos;Sauvegarde journaliere&apos; | true
+git push origin master -f
+
+WPNAME=&apos;MCUsinages&apos;
+WPDBVERSION=&apos;&apos;
+WPPLUGIN=&apos;&apos;
+URL=&apos;https://www.mc-usinages.com/&apos;
+TYPE=&apos;joomla&apos;
+SERV=&apos;&apos;
+FAVICON=&apos;&apos;
+curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>

@@ -26,7 +26,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command># SAUVEGARDE DE LA BASE DE DONEES TRIPAPYRUS (Application)
+      <command># SAUVEGARDE DE LA BASE DE DONNEES TRIPAPYRUS (Application)
 ssh aloa@vps490005.ovh.net &apos;mysqldump -u root -p&quot;Palmier-10&quot; tripapyrus &gt; /var/www/database_saves/TRIPAPYRUS/export_database_$(date +%Y-%m-%d).sql&apos;
 # Récupération des sauvegardes des bases de données de TRIPAPYRUS sur PROXMOX
 scp -r aloa@vps490005.ovh.net:/var/www/database_saves/TRIPAPYRUS/ /var/lib/jenkins/HOME/Tripapyrus_Sauvegardes/
