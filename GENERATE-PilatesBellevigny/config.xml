@@ -45,7 +45,7 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>cd Pilates
+                  <execCommand>cd pilatesbellevigny
 										WPDBNAME=`cat wp-config.php | grep &apos;DB_NAME&apos; | cut -d \&apos; -f 4`
 										WPDBUSER=`cat wp-config.php | grep &apos;DB_USER&apos; | cut -d \&apos; -f 4`
 										WPDBPASS=`cat wp-config.php | grep &apos;DB_PASSWORD&apos; | cut -d \&apos; -f 4`

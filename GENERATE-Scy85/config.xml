@@ -45,7 +45,7 @@
                   <noDefaultExcludes>false</noDefaultExcludes>
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
-                  <execCommand>cd www/scy85
+                  <execCommand>cd Scy85
 										WPDBNAME=`cat configuration.php | grep &apos;$db &apos; | cut -d \&apos; -f 2`
 										WPDBUSER=`cat configuration.php | grep &apos;$$user &apos; | cut -d \&apos; -f 2`
 										WPDBPASS=`cat configuration.php | grep &apos;$password &apos; | cut -d \&apos; -f 2`

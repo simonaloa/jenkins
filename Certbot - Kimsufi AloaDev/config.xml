@@ -26,7 +26,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sudo certbot renew</command>
+      <command>sudo certbot renew </command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
