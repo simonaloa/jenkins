@@ -20,7 +20,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>H 2 * * *</spec>
+      <spec>H 2 * * 0</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
@@ -37,7 +37,7 @@ scp -r /var/lib/jenkins/HOME/originehalle_$(date +%Y-%m-%d).zip zwgipbh@ftp.clus
 #On efface le zip sur aloa.ovh
 ssh origineh@ssh.cluster006.hosting.ovh.net  &apos;rm -r originehalle_$(date +%Y-%m-%d).zip&apos;
 # On conserve que les 15 derniers jours
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/originehalle/ -ctime +14 -exec rm {} \;&apos;</command>
+ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/originehalle/ -ctime +21 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>

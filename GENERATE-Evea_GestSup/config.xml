@@ -28,11 +28,11 @@
     <hudson.tasks.Shell>
       <command>#!/bin/bash
 cd $HOME/HOME/Evea_GestSup;
-USER=lesmetives_aloa
-PASS=Palmier-10
-HOST=ftp.lesmetives.com				
+USER=logistiqueadmin
+PASS=SY9xn53xtnf3X954yRUv
+HOST=ftp.onlinux-fr.setupdns.net				
 
-wget -mnH --cut-dirs=3 ftp://$USER:$PASS@$HOST/public/www/logistique -X public/www/logistique/.git
+wget -mnH --cut-dirs=3 ftp://$USER:$PASS@$HOST/public/logistique -X public/logistique/.git
 
 git add . -v
 git commit -m &apos;Sauvegarde journaliere&apos; | true
@@ -41,7 +41,7 @@ git push origin master -f | true
 WPNAME=&apos;Evea_GestSup&apos;
 WPDBVERSION=``
 WPPLUGIN=``
-URL=&apos;http://lesmetives.com/logistique/&apos;
+URL=&apos;https://logistique.aloainformatique.com/&apos;
 TYPE=&apos;&apos;
 SERV=&apos;&apos;
 FAVICON=&apos;http://lesmetives.com/logistique/upload/logo/logo.png&apos;

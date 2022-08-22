@@ -46,7 +46,7 @@
                   <makeEmptyDirs>false</makeEmptyDirs>
                   <patternSeparator>[, ]+</patternSeparator>
                   <execCommand>cd barre-economiste
-										WPDBNAME=`cat wp-config.php | grep &apos;DB_NAME&apos; | cut -d \&apos; -f 4`
+                                                                                WPDBNAME=`cat wp-config.php | grep &apos;DB_NAME&apos; | cut -d \&apos; -f 4`
 										WPDBUSER=`cat wp-config.php | grep &apos;DB_USER&apos; | cut -d \&apos; -f 4`
 										WPDBPASS=`cat wp-config.php | grep &apos;DB_PASSWORD&apos; | cut -d \&apos; -f 4`
 										WPDBHOST=`cat wp-config.php | grep &apos;DB_HOST&apos; | cut -d \&apos; -f 4 | cut -d : -f 1`
@@ -58,9 +58,8 @@
 										echo &quot;Port present pour le mysqldump&quot;
 										mysqldump -h $WPDBHOST -u $WPDBUSER -p$WPDBPASS $WPDBNAME -P $WPDBPORT &gt; export_database.sql
 										fi
-										git add . -v 
-										git commit --author=&quot;Simon Via Jenkins &lt;simon@aloa-informatique.com.com&gt;&quot; -m &apos;Sauvegarde journaliere&apos; | true
-									</execCommand>
+										git add . -v
+										git commit --author=&quot;Simon Via Jenkins &lt;simon@aloa-informatique.com&gt;&quot; -m &apos;Sauvergarde journaliere&apos; | true						</execCommand>
                   <execTimeout>2000000</execTimeout>
                   <usePty>false</usePty>
                   <useAgentForwarding>false</useAgentForwarding>
@@ -84,6 +83,7 @@ cd $HOME/HOME/Barre-Economiste;
 git fetch site master
 git reset --hard site/master
 git push origin master -f
+
 WPNAME=&apos;Barre_Economiste&apos;
 WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
 WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`

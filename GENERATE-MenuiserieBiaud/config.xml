@@ -29,7 +29,7 @@
       <command>#!/bin/bash
 cd $HOME/HOME/MenuiserieBiaud;
 USER=menuiserav
-PASS=cT4FhegR9rhh
+PASS=Palmier10
 HOST=ftp.cluster011.ovh.net				
 
 wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
