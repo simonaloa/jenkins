@@ -1,52 +1,42 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
-  <actions/>
-  <description>GENERATED JOB</description>
+  <description>Tache automatisée pour sauvegarder les fichiers du site : http://www.aidvy.com/</description>
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
     <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
-      <gogsSecret>{AQAAABAAAAAQAZxHpDV4qMWhSeYlFpyNGucbmnrerQHBrA8fUABYK0k=}</gogsSecret>
+      <gogsSecret>{AQAAABAAAAAQRdA3I55TiEO97mcoduJQkfP/pYwzUm5S0SP8WsjAwwc=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
       <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
-  <disabled>true</disabled>
+  <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.TimerTrigger>
-      <spec>18 23 * * *</spec>
+      <spec>H 2 * * *</spec>
     </hudson.triggers.TimerTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#!/bin/bash
-cd $HOME/HOME/Unc85_Refonte;
-USER=uncwgeep
-PASS=mCtvuFqz3
-HOST=ftp.cluster015.ovh.net				
-
-wget -mnH --cut-dirs=1 ftp://$USER:$PASS@$HOST/www -X www/.git
-
-git add . -v
-git commit -m &apos;Sauvegarde journaliere&apos; | true
-git push origin master -f | true
-
-WPNAME=&apos;unc85_refonte&apos;
-WPDBVERSION=`cat wp-includes/version.php | grep &quot;wp_version =&quot; | cut -d \&apos; -f 2`
-WPPLUGIN=`find wp-content/plugins/ -type d -maxdepth 1 | cut -f3 -d &apos;/&apos;`
-URL=&apos;https://www.unc85.com/&apos;
-TYPE=&apos;wordpress&apos;
-SERV=&apos;&apos;
-FAVICON=&apos;https://www.unc85.com/wp-content/uploads/2018/02/unc85.png&apos;
-curl https://aloa:Palmier-10@monit.aloa.ovh/RapportsMonitoring/post.php -X POST -d &quot;type=$TYPE&amp;name=$WPNAME&amp;version=$WPDBVERSION&amp;plugin=$WPPLUGIN&amp;url=$URL&amp;serveur=$SERV&amp;favicon=$FAVICON&quot;
-			</command>
+      <command>#Connexion u serveur Aidvy
+ssh aidvycompe@ftp.cluster005.hosting.ovh.net &apos;zip -r aidvy_$(date +%Y-%m-%d).zip www&apos;
+#On se met à la racine de Jenkins
+cd /var/lib/jenkins/HOME/
+#On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
+scp -r aidvycompe@ftp.cluster005.hosting.ovh.net:aidvy_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+#On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
+scp -r /var/lib/jenkins/HOME/aidvy_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/aidvy/
+#On efface le zip sur aloa.ovh
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r aidvy_$(date +%Y-%m-%d).zip&apos;
+# On conserve que les 15 derniers jours
+ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/aidvy/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
