@@ -27,7 +27,7 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#Connexion à aloa.ovh
-ssh origineh@ssh.cluster006.hosting.ovh.net  &apos;zip -r originehalle_$(date +%Y-%m-%d).zip www/&apos;
+ssh origineh@ssh.cluster006.hosting.ovh.net  &apos;zip -r originehalle_$(date +%Y-%m-%d).zip www/ -x *.git*&apos;
 #On se met à la racine de Jenkins
 cd /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
