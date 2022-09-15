@@ -36,13 +36,13 @@ HOST=ftp.onlinux-fr.setupdns.net
 wget -mnH --cut-dirs=2 ftp://$USER:$PASS@$HOST/public/www -X public/www/.git
 # On crée le zip 
 zip -r landeronde_$(date +%Y-%m-%d).zip $HOME/HOME/Landeronde
-#On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
-scp -r /var/lib/jenkins/HOME/Landeronde/landeronde_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/landeronde/
+#On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;aloaovhjok&quot;
+scp -r /var/lib/jenkins/HOME/Landeronde/landeronde_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net:Sauvegarde/landeronde/
 #On efface le fichier zip de Jenkins
 cd $HOME/HOME/Landeronde
 rm -r landeronde_$(date +%Y-%m-%d).zip
 # On conserve que les 15 derniers jours
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;find Sauvegarde/landeronde/ -ctime +14 -exec rm {} \;&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;find Sauvegarde/landeronde/ -ctime +14 -exec rm {} \;&apos;
 
 WPNAME=&apos;Landeronde&apos;
 WPDBVERSION=`cat language/en-GB/en-GB.xml | grep &quot;&lt;version&gt;&quot; | cut -d &apos;&gt;&apos; -f 2 | cut -d &apos;&lt;&apos; -f 1`
