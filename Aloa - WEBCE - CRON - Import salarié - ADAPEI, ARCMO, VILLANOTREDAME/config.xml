@@ -4,12 +4,13 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret></gogsSecret>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
+      <gogsSecret>{AQAAABAAAAAQv3yb8YrHBDiAnAFvOE2gal8Xs9CVEO+tV1YR8rNs/Yo=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
+      <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
     <jenkins.model.BuildDiscarderProperty>
       <strategy class="hudson.tasks.LogRotator">
@@ -39,8 +40,19 @@ ssh root@vps490005.ovh.net &quot;runuser -l aloa -c &apos;cd /var/www/solution_c
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.05">
+      <daysToKeep>60</daysToKeep>
+      <numToKeep>-1</numToKeep>
+      <resultsToDiscard/>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <regexp></regexp>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
+  </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.8.10"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.12"/>
   </buildWrappers>
 </project>

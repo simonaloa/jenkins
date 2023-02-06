@@ -63,6 +63,16 @@ echo &quot;&quot;</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.05">
+      <daysToKeep>30</daysToKeep>
+      <numToKeep>-1</numToKeep>
+      <resultsToDiscard/>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <regexp></regexp>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
     <hudson.plugins.emailext.ExtendedEmailPublisher plugin="email-ext@2.82">
       <recipientList>digital@aloa-informatique.com, mathilde@aloa-informatique.com</recipientList>
       <configuredTriggers>

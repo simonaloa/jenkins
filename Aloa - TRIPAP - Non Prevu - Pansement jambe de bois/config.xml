@@ -4,12 +4,13 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.25.1">
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@2.0.0">
       <doNotScan>false</doNotScan>
     </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
-    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.14">
-      <gogsSecret></gogsSecret>
+    <org.jenkinsci.plugins.gogs.GogsProjectProperty plugin="gogs-webhook@1.0.15">
+      <gogsSecret>{AQAAABAAAAAQf1V/Ee6N4VikAh3AjBZbxK9ibi5iUIFJuZlvfrCvm2c=}</gogsSecret>
       <gogsUsePayload>false</gogsUsePayload>
+      <gogsBranchFilter></gogsBranchFilter>
     </org.jenkinsci.plugins.gogs.GogsProjectProperty>
   </properties>
   <scm class="hudson.scm.NullSCM"/>
@@ -27,8 +28,20 @@
     <hudson.tasks.Shell>
       <command># sudo runuser -l aloa -c &apos;cd /var/www/html/Tripapyrus; php bin/console app:exportRapportCollecte -vv&apos;
 ssh aloa@vps490005.ovh.net &apos;cd /var/www/Tripapyrus; php bin/console app:sanitizeNonPrevu -vv&apos;</command>
+      <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.05">
+      <daysToKeep>60</daysToKeep>
+      <numToKeep>-1</numToKeep>
+      <resultsToDiscard/>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <regexp></regexp>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
+  </publishers>
   <buildWrappers/>
 </project>

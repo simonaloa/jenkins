@@ -31,6 +31,17 @@ sudo runuser -l gogs -c &apos;/opt/gogs/gogs backup --database-only --config=/et
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.05">
+      <daysToKeep>15</daysToKeep>
+      <numToKeep>-1</numToKeep>
+      <resultsToDiscard/>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <regexp></regexp>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
+  </publishers>
   <buildWrappers/>
 </project>
