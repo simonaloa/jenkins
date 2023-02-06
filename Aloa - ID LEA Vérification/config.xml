@@ -37,12 +37,23 @@
       <command>cd /var/lib/jenkins/HOME/VerificationLea
 
 #wget -O test.html &quot;http://www.aloa-informatique.com/chantierecole/index_verif_identifiants.php?LOGIN=0553816306&amp;PASSWORD=900016&quot;;
-wget -O test.html &quot;http://chantierecole.aloa-informatique.com/index_verif_identifiants.php?LOGIN=0553816306&amp;PASSWORD=900016&quot;;
+wget -O test.html &quot;https://aloa-informatique.com/chantierecole/index_verif_identifiants.php?LOGIN=0553816306&amp;PASSWORD=900016&quot;;
 
 grep &quot;Validation=Vrai&quot; test.html</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.05">
+      <daysToKeep>180</daysToKeep>
+      <numToKeep>-1</numToKeep>
+      <resultsToDiscard/>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <regexp></regexp>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
+  </publishers>
   <buildWrappers/>
 </project>

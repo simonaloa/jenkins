@@ -34,10 +34,25 @@ cd /var/lib/jenkins/HOME/WebCE_VillaNotreDame/database_saves/
 rsync -avz root@vps490005.ovh.net:/var/www/database_saves/VILLANOTREDAME/ .
 
 # Suppression des sauvegardes db sur la PROD
-ssh root@vps490005.ovh.net &apos;rm -r /var/www/database_saves/VILLANOTREDAME/*&apos;</command>
+ssh root@vps490005.ovh.net &apos;rm -r /var/www/database_saves/VILLANOTREDAME/*&apos;
+
+# On conserve que les 30 derniers jours sur le ProxMox
+cd /var/lib/jenkins/HOME/WebCE_VillaNotreDame/database_saves
+find . -ctime +30 -exec rm {} \;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>
-  <publishers/>
+  <publishers>
+    <org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher plugin="discard-old-build@1.05">
+      <daysToKeep>60</daysToKeep>
+      <numToKeep>-1</numToKeep>
+      <resultsToDiscard/>
+      <minLogFileSize>-1</minLogFileSize>
+      <maxLogFileSize>-1</maxLogFileSize>
+      <intervalDaysToKeep>-1</intervalDaysToKeep>
+      <intervalNumToKeep>-1</intervalNumToKeep>
+      <regexp></regexp>
+    </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
+  </publishers>
   <buildWrappers/>
 </project>
