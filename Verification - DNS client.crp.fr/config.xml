@@ -15,7 +15,7 @@
   </properties>
   <scm class="hudson.scm.NullSCM"/>
   <canRoam>true</canRoam>
-  <disabled>false</disabled>
+  <disabled>true</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
@@ -42,7 +42,7 @@ curl https://client.crp.fr/ --insecure --max-time 30</command>
       <intervalNumToKeep>-1</intervalNumToKeep>
       <regexp></regexp>
     </org.jenkinsci.plugins.discardbuild.DiscardBuildPublisher>
-    <hudson.tasks.Mailer plugin="mailer@1.33">
+    <hudson.tasks.Mailer plugin="mailer@408.vd726a_1130320">
       <recipients>simon@aloa-informatique.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
