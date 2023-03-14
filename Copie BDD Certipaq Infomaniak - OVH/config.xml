@@ -35,10 +35,11 @@ cd /var/lib/jenkins/HOME/Certipaq_SaveDB
 scp -r nv319_aloa@nv319.ftp.infomaniak.com:/tmp/export_database_$(date +%Y-%m-%d).sql /var/lib/jenkins/HOME/Certipaq_SaveDB
 
 # Copie de la sauvegarde des tables de Certipaq chez OVH
-scp -r  /var/lib/jenkins/HOME/Certipaq_SaveDB/export_database_$(date +%Y-%m-%d).sql zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/Certipaq/
+# scp -r  /var/lib/jenkins/HOME/Certipaq_SaveDB/export_database_$(date +%Y-%m-%d).sql zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/Certipaq/
+scp -r  /var/lib/jenkins/HOME/Certipaq_SaveDB/export_database_$(date +%Y-%m-%d).sql aloaovhjok@ftp.cluster023.hosting.ovh.net:Sauvegarde/Certipaq/
 
 # IMPORT DE LA BASE DE DONEES Certipaq
-ssh zwgipbh@ftp.cluster020.hosting.ovh.net  &apos;mysql --host=rm65978-001.privatesql --port=35252 -u adminCerti -p&quot;Kjn7E4lr3NwkDv2NqOkq&quot; extractCertipaq &lt; Sauvegarde/Certipaq/export_database_$(date +%Y-%m-%d).sql&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;mysql --host=rm65978-001.privatesql --port=35252 -u adminCerti -p&quot;Kjn7E4lr3NwkDv2NqOkq&quot; extractCertipaq &lt; Sauvegarde/Certipaq/export_database_$(date +%Y-%m-%d).sql&apos;
 
 # On conserve que les 15 derniers jours
 cd /var/lib/jenkins/HOME/Certipaq_SaveDB
