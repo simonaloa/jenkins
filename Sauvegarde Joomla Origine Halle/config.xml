@@ -26,7 +26,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>#Connexion à aloa.ovh
+      <command>#Connexion à originehalle
 ssh origineh@ssh.cluster006.hosting.ovh.net  &apos;zip -r originehalle_$(date +%Y-%m-%d).zip www/ -x *.git*&apos;
 #On se met à la racine de Jenkins
 cd /var/lib/jenkins/HOME/

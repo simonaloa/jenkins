@@ -27,19 +27,21 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#Connexion à aloa.ovh
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r uraa_$(date +%Y-%m-%d).zip www/uraa/&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r uraa_$(date +%Y-%m-%d).zip www/uraa/ -x *.git*&apos;
 #On se met à la racine de Jenkins
-cd /var/lib/jenkins/HOME/
+# cd /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
-scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:uraa_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+# scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:uraa_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis Jenkins vers le serveur aloa.ovh
-# scp -r /var/lib/jenkins/HOME/uraa_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/uraa/
-scp -r /var/lib/jenkins/HOME/uraa_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net.net:Sauvegarde/uraa/
+# scp -r /var/lib/jenkins/HOME/uraa_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:/Sauvegarde/uraa/
+# scp -r /var/lib/jenkins/HOME/uraa_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net.net:Sauvegarde/uraa/
+#On déplace le zip sur aloa.ovh
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;mv  uraa_$(date +%Y-%m-%d).zip Sauvegarde/uraa/&apos;
 #On efface le zip sur aloa.ovh
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r uraa_$(date +%Y-%m-%d).zip&apos;
+# ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r uraa_$(date +%Y-%m-%d).zip&apos;
 #On efface le zip de Jenkins
-cd /var/lib/jenkins/HOME/
-rm -r uraa_$(date +%Y-%m-%d).zip
+# cd /var/lib/jenkins/HOME/
+# rm -r uraa_$(date +%Y-%m-%d).zip
 # On conserve que les 15 derniers jours
 ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;find Sauvegarde/uraa/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>

@@ -28,7 +28,7 @@
     <hudson.tasks.Shell>
       <command>#On se connecte sur le serveur aloa.ovh
 # ssh zwgipbh@ftp.cluster020.hosting.ovh.net &apos;find /home/zwgipbh/Sauvegarde/databases -ctime +14 -exec rm {} \;&apos;
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;find /home/zwgipbh/Sauvegarde/databases -ctime +14 -exec rm {} \;&apos;</command>
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;find Sauvegarde/databases -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
     </hudson.tasks.Shell>
   </builders>

@@ -29,17 +29,19 @@
       <command>#Connexion à aloa.ovh
 ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r portlavie_$(date +%Y-%m-%d).zip portlavie&apos;
 #On se met à la racine de Jenkins
-cd /var/lib/jenkins/HOME/
+# cd /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
-scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:portlavie_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+# scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:portlavie_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;zwgipbh&quot;
 # scp -r /var/lib/jenkins/HOME/portlavie_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/PortLaVie/
-scp -r /var/lib/jenkins/HOME/portlavie_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net:Sauvegarde/PortLaVie/
+# scp -r /var/lib/jenkins/HOME/portlavie_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net:Sauvegarde/PortLaVie/
 #On efface le zip sur aloa.ovh
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r portlavie_$(date +%Y-%m-%d).zip&apos;
+# ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r portlavie_$(date +%Y-%m-%d).zip&apos;
+#On déplace le zip sur aloa.ovh
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;mv portlavie_$(date +%Y-%m-%d).zip /Sauvegarde/PortLaVie/&apos;
 #On efface le zip du Jenkins
-cd /var/lib/jenkins/HOME/
-rm -r portlavie_$(date +%Y-%m-%d).zip
+# cd /var/lib/jenkins/HOME/
+# rm -r portlavie_$(date +%Y-%m-%d).zip
 # On conserve que les 15 derniers jours
 ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;find Sauvegarde/PortLaVie/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>

@@ -27,19 +27,21 @@
   <builders>
     <hudson.tasks.Shell>
       <command>#Connexion à aloa.ovh
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r scy85_$(date +%Y-%m-%d).zip Scy85&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r scy85_$(date +%Y-%m-%d).zip Scy85 -x *.git*&apos;
 #On se met à la racine de Jenkins
-cd /var/lib/jenkins/HOME/
+# cd /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis aloa.ovh vers Jenkins
-scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:scy85_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
+# scp -r aloaovhjok@ftp.cluster023.hosting.ovh.net:scy85_$(date +%Y-%m-%d).zip /var/lib/jenkins/HOME/
 #On réalise une copie des fichiers depuis Jenkins vers le serveur &quot;aloa.ovh&quot;
-# scp -r /var/lib/jenkins/HOME/scy85_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:Sauvegarde/scy85/
-scp -r /var/lib/jenkins/HOME/scy85_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net.net:Sauvegarde/scy85/
+# scp -r /var/lib/jenkins/HOME/scy85_$(date +%Y-%m-%d).zip zwgipbh@ftp.cluster020.hosting.ovh.net:/Sauvegarde/scy85/
+# scp -r /var/lib/jenkins/HOME/scy85_$(date +%Y-%m-%d).zip aloaovhjok@ftp.cluster023.hosting.ovh.net.net:Sauvegarde/scy85/
 #On efface le fichier zip d&apos;aloa.ovh
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;rm -r scy85_$(date +%Y-%m-%d).zip&apos;
+# ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;rm -r scy85_$(date +%Y-%m-%d).zip&apos;
+#On déplace le fichier zip d&apos;aloa.ovh
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;mv scy85_$(date +%Y-%m-%d).zip Sauvegarde/scy85/&apos;
 #On efface le zip du Jenkins
-cd /var/lib/jenkins/HOME/
-rm -r scy85_$(date +%Y-%m-%d).zip
+# cd /var/lib/jenkins/HOME/
+# rm -r scy85_$(date +%Y-%m-%d).zip
 # On conserve que les 15 derniers jours
 ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;find Sauvegarde/scy85/ -ctime +14 -exec rm {} \;&apos;</command>
       <configuredLocalRules/>
