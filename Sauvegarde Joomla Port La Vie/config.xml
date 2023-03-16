@@ -38,7 +38,7 @@ ssh aloaovhjok@ftp.cluster023.hosting.ovh.net &apos;zip -r portlavie_$(date +%Y-
 #On efface le zip sur aloa.ovh
 # ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;rm -r portlavie_$(date +%Y-%m-%d).zip&apos;
 #On déplace le zip sur aloa.ovh
-ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;mv portlavie_$(date +%Y-%m-%d).zip /Sauvegarde/PortLaVie/&apos;
+ssh aloaovhjok@ftp.cluster023.hosting.ovh.net  &apos;mv portlavie_$(date +%Y-%m-%d).zip Sauvegarde/PortLaVie/&apos;
 #On efface le zip du Jenkins
 # cd /var/lib/jenkins/HOME/
 # rm -r portlavie_$(date +%Y-%m-%d).zip
